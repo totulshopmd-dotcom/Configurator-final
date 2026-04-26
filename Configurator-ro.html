@@ -1,1962 +1,328 @@
-<!DOCTYPE html>
-<html lang="ro">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculator Acoperiș și Gard | TotulShop.md</title>
-<meta name="description" content="Calculează rapid prețul pentru acoperiș sau gard metalic. Ofertă instant, export PDF și contact direct.">
-<meta name="keywords" content="acoperis metalic, gard metalic, calculator acoperis, calculator gard, pret acoperis, pret gard, TotulShop Moldova">
+Ru
 
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title></title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-<style>
-:root{
-  --ts-red:#c62828;
-  --ts-red-dark:#a91f1f;
-  --ts-black:#111111;
-  --ts-bg:#f5f5f5;
-  --ts-card:#ffffff;
-  --ts-line:#e5e7eb;
-  --ts-text:#1f2937;
-  --ts-muted:#6b7280;
-  --ts-wa:#25D366;
-  --ts-ms:#0084FF;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  font-family:Arial,Helvetica,sans-serif;
-  background:var(--ts-bg);
-  color:var(--ts-text);
-}
-.ts-wrap{
-  width:100%;
-  max-width:1450px;
-  margin:0 auto;
-  padding:20px;
-}
-.ts-hero{
-  background:linear-gradient(135deg,#111,#222);
-  color:#fff;
-  border-radius:24px;
-  padding:24px;
-  margin-bottom:18px;
-}
-.ts-hero h1{
-  margin:0 0 8px;
-  font-size:32px;
-  line-height:1.15;
-}
-.ts-hero p{
-  margin:0;
-  color:#e5e7eb;
-  line-height:1.6;
-  max-width:980px;
-}
-.ts-tabs{
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-  margin-bottom:18px;
-}
-.ts-tab{
-  border:0;
-  background:#e0e0e0;
-  color:#222;
-  padding:13px 18px;
-  border-radius:14px;
-  cursor:pointer;
-  font-weight:700;
-  font-size:15px;
-  transition:.2s ease;
-}
-.ts-tab:hover{transform:translateY(-1px)}
-.ts-tab.ts-active{
-  background:var(--ts-red);
-  color:#fff;
-}
-.ts-section{display:none}
-.ts-section.ts-active{display:block}
-
-.ts-layout{
-  display:grid;
-  grid-template-columns:minmax(0,1.35fr) minmax(340px,520px);
-  gap:22px;
-  align-items:start;
-}
-.ts-card{
-  background:var(--ts-card);
-  border:1px solid var(--ts-line);
-  border-radius:22px;
-  padding:20px;
-  box-shadow:0 6px 20px rgba(0,0,0,.05);
-}
-.ts-title{
-  margin:0 0 18px;
-  font-size:30px;
-  line-height:1.1;
-}
-.ts-section-title{
-  margin:18px 0 12px;
-  color:var(--ts-red);
-  font-size:16px;
-  font-weight:700;
-}
-.ts-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
-}
-.ts-full{grid-column:1/-1}
-.ts-label{
-  display:block;
-  margin-bottom:6px;
-  font-size:14px;
-  font-weight:700;
-}
-.ts-input,.ts-textarea{
-  width:100%;
-  border:1px solid #d7d7d7;
-  border-radius:12px;
-  padding:12px 14px;
-  font-size:15px;
-  background:#fff;
-  outline:none;
-}
-.ts-input:focus,.ts-textarea:focus{
-  border-color:var(--ts-red);
-  box-shadow:0 0 0 3px rgba(198,40,40,.12);
-}
-.ts-input.ts-error,.ts-textarea.ts-error{
-  border-color:#d32f2f !important;
-  box-shadow:0 0 0 3px rgba(211,47,47,.12) !important;
-  background:#fff6f6;
-}
-.ts-textarea{
-  min-height:110px;
-  resize:vertical;
-}
-.ts-cards{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:12px;
-}
-.ts-model{
-  border:1px solid #ddd;
-  border-radius:16px;
-  overflow:hidden;
-  cursor:pointer;
-  background:#fff;
-  transition:.2s ease;
-}
-.ts-model:hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 18px rgba(0,0,0,.08);
-}
-.ts-model.ts-selected{
-  border-color:var(--ts-red);
-  box-shadow:0 0 0 2px rgba(198,40,40,.12);
-}
-.ts-model img{
-  width:100%;
-  height:180px;
-  object-fit:contain;
-  display:block;
-  background:linear-gradient(180deg,#fafafa 0%,#f1f1f1 100%);
-  padding:10px;
-}
-.ts-model div{
-  padding:10px;
-  font-size:14px;
-  font-weight:700;
-  text-align:center;
-  min-height:56px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-.ts-colors{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  padding-bottom:28px;
-}
-.ts-color{
-  width:46px;
-  height:46px;
-  border-radius:999px;
-  border:2px solid #ddd;
-  cursor:pointer;
-  position:relative;
-  transition:.2s ease;
-}
-.ts-color.ts-selected{
-  border-color:#111;
-  transform:scale(1.08);
-}
-.ts-color span{
-  position:absolute;
-  left:50%;
-  bottom:-25px;
-  transform:translateX(-50%);
-  white-space:nowrap;
-  font-size:11px;
-  display:none;
-  background:#fff;
-  border:1px solid #ddd;
-  border-radius:999px;
-  padding:2px 6px;
-}
-.ts-color.ts-selected span{display:block}
-
-.ts-pills{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-}
-.ts-pill{
-  min-width:100px;
-  min-height:92px;
-  padding:10px 12px;
-  border-radius:999px;
-  border:2px solid #d8d8d8;
-  background:#fff;
-  color:#222;
-  cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  font-size:15px;
-  font-weight:700;
-  line-height:1.2;
-  transition:.2s ease;
-}
-.ts-pill:hover{
-  transform:translateY(-1px);
-  box-shadow:0 6px 16px rgba(0,0,0,.08);
-}
-.ts-pill.ts-selected{
-  background:#111;
-  color:#fff;
-  border-color:#111;
-  transform:scale(1.04);
-  box-shadow:0 0 0 3px rgba(17,17,17,.08);
-}
-
-.ts-summary{
-  position:sticky;
-  top:20px;
-}
-.ts-preview{
-  position:relative;
-  border-radius:18px;
-  overflow:hidden;
-  background:linear-gradient(180deg,#fafafa 0%,#f0f0f0 100%);
-  border:1px solid #ececec;
-  margin-bottom:14px;
-}
-.ts-preview img{
-  width:100%;
-  height:380px;
-  object-fit:contain;
-  display:block;
-  padding:18px;
-}
-.ts-badge{
-  position:absolute;
-  left:12px;
-  bottom:12px;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  background:rgba(255,255,255,.96);
-  border-radius:999px;
-  padding:8px 12px;
-  font-size:13px;
-  font-weight:700;
-  border:1px solid rgba(0,0,0,.06);
-}
-.ts-dot{
-  width:14px;
-  height:14px;
-  border-radius:999px;
-  display:inline-block;
-  border:1px solid rgba(0,0,0,.2);
-}
-.ts-meta{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-bottom:16px;
-}
-.ts-meta div{
-  background:#fafafa;
-  border:1px solid #eee;
-  border-radius:12px;
-  padding:12px;
-  font-size:13px;
-}
-.ts-meta strong{
-  display:block;
-  margin-bottom:6px;
-  font-size:15px;
-}
-.ts-price{
-  background:#111;
-  color:#fff;
-  border-radius:14px;
-  padding:14px 16px;
-  margin-bottom:14px;
-}
-.ts-price strong{font-size:28px}
-.ts-row{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  align-items:center;
-  border-bottom:1px solid #eee;
-  padding:12px 0;
-}
-.ts-row small{
-  display:block;
-  color:#777;
-  margin-bottom:3px;
-}
-.ts-box{
-  margin-top:14px;
-  background:#fafafa;
-  border:1px solid #ececec;
-  border-radius:14px;
-  padding:14px;
-}
-.ts-box-title{
-  margin:0 0 8px;
-  font-size:15px;
-  font-weight:700;
-}
-.ts-box-text{
-  margin:0;
-  font-size:14px;
-  line-height:1.5;
-  color:#444;
-}
-.ts-example{
-  margin-top:12px;
-  background:#fff8e1;
-  border:1px solid #f0df9a;
-  border-radius:12px;
-  padding:12px 14px;
-  font-size:14px;
-  line-height:1.5;
-  color:#6d4c41;
-}
-.ts-actions{
-  display:grid;
-  gap:10px;
-  margin-top:18px;
-}
-.ts-btn-main{
-  width:100%;
-  border:0;
-  border-radius:12px;
-  padding:15px 18px;
-  font-size:15px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.2s ease;
-}
-.ts-btn-main:hover{opacity:.95}
-.ts-btn-wa{background:var(--ts-wa);color:#fff}
-.ts-btn-ms{background:var(--ts-ms);color:#fff}
-.ts-btn-light{background:#fff;color:#111;border:1px solid #ddd}
-.ts-note{
-  margin-top:14px;
-  padding:12px 14px;
-  border-radius:12px;
-  background:#fff8e1;
-  color:#6d4c41;
-  font-size:14px;
-  line-height:1.5;
-}
-.ts-copy{margin-top:14px}
-
-.ts-project-card{
-  background:#fff;
-  border:1px solid #e7e7e7;
-  border-radius:22px;
-  overflow:hidden;
-  box-shadow:0 6px 22px rgba(0,0,0,.05);
-}
-.ts-project-video{
-  position:relative;
-  padding-top:56.25%;
-  background:#000;
-}
-.ts-project-video iframe{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  border:0;
-}
-.ts-project-body{
-  padding:20px;
-}
-.ts-project-body h3{
-  margin:0 0 10px;
-  font-size:28px;
-  line-height:1.1;
-}
-.ts-project-body p{
-  margin:0 0 14px;
-  color:var(--ts-muted);
-  line-height:1.7;
-}
-
-.ts-contact{
-  margin-top:26px;
-  background:#fff;
-  border:1px solid #e5e7eb;
-  border-radius:26px;
-  padding:28px;
-  display:grid;
-  grid-template-columns:1.15fr .85fr;
-  gap:22px;
-  align-items:center;
-  box-shadow:0 12px 30px rgba(0,0,0,.06);
-}
-.ts-contact-left h3{
-  margin:0 0 10px;
-  font-size:32px;
-  line-height:1.05;
-  color:#111;
-}
-.ts-contact-left p{
-  margin:0 0 16px;
-  color:#6b7280;
-  line-height:1.7;
-  font-size:15px;
-  max-width:620px;
-}
-.ts-contact-kicker{
-  display:inline-block;
-  margin-bottom:12px;
-  padding:8px 12px;
-  border-radius:999px;
-  background:#fff5f5;
-  color:#e31e24;
-  border:1px solid #ffd8d8;
-  font-size:12px;
-  font-weight:800;
-  text-transform:uppercase;
-  letter-spacing:.3px;
-}
-.ts-contact-points{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.ts-contact-points span{
-  display:inline-flex;
-  align-items:center;
-  padding:10px 14px;
-  border-radius:999px;
-  background:#f8fafc;
-  border:1px solid #e5e7eb;
-  color:#374151;
-  font-size:13px;
-  font-weight:700;
-}
-.ts-contact-right{
-  display:grid;
-  gap:12px;
-}
-.ts-contact-main,.ts-contact-wa{
-  text-decoration:none;
-  border-radius:20px;
-  padding:18px 20px;
-  display:block;
-  transition:.2s ease;
-}
-.ts-contact-main{
-  background:linear-gradient(135deg,#111,#222);
-  color:#fff;
-}
-.ts-contact-wa{
-  background:linear-gradient(135deg,#25D366,#1fb85a);
-  color:#fff;
-}
-.ts-contact-main:hover,.ts-contact-wa:hover{transform:translateY(-2px)}
-.ts-contact-main small,.ts-contact-wa small{
-  display:block;
-  font-size:12px;
-  opacity:.85;
-  margin-bottom:6px;
-  text-transform:uppercase;
-  letter-spacing:.4px;
-}
-.ts-contact-main strong,.ts-contact-wa strong{
-  display:block;
-  font-size:28px;
-  line-height:1.1;
-}
-.ts-footer{
-  margin-top:20px;
-  padding:20px 10px;
-}
-.ts-footer-inner{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:20px;
-  flex-wrap:wrap;
-  padding:20px;
-  border-radius:18px;
-  background:#111;
-  color:#fff;
-}
-.ts-footer-logo{
-  height:45px;
-  object-fit:contain;
-}
-.ts-footer-text{
-  display:flex;
-  flex-direction:column;
-  font-size:13px;
-  gap:4px;
-  opacity:.9;
-}
-.ts-footer-text strong{font-size:15px}
-
-.ts-export-wrap{
-  position:fixed;
-  left:-99999px;
-  top:0;
-  width:794px;
-  background:#fff;
-  z-index:-1;
-}
-.ts-export-sheet{
-  width:794px;
-  min-height:1123px;
-  background:#fff;
-  color:#111;
-  font-family:Arial,Helvetica,sans-serif;
-  padding:28px;
-  box-sizing:border-box;
-}
-.ts-recalc{
-  position:fixed;
-  top:16px;
-  right:16px;
-  background:rgba(27,143,58,.88);
-  color:#fff;
-  padding:12px 16px;
-  border-radius:12px;
-  font-weight:700;
-  z-index:9999;
-  opacity:0;
-  transform:translateY(-10px);
-  pointer-events:none;
-  transition:.25s ease;
-  box-shadow:0 8px 24px rgba(0,0,0,.12);
-}
-.ts-recalc.ts-show{
-  opacity:1;
-  transform:translateY(0);
-}
-
-@media (max-width:1080px){
-  .ts-layout{grid-template-columns:1fr}
-  .ts-summary{position:static}
-}
-@media (max-width:720px){
-  .ts-grid,.ts-cards,.ts-meta{grid-template-columns:1fr}
-  .ts-title{font-size:24px}
-  .ts-model img{height:160px}
-  .ts-preview img{height:320px;padding:12px}
-  .ts-pill{min-width:84px;min-height:84px;font-size:14px}
-  .ts-project-body h3{font-size:22px}
-}
-@media (max-width:900px){
-  .ts-contact{grid-template-columns:1fr;padding:22px}
-  .ts-contact-left h3{font-size:26px}
-  .ts-contact-main strong,.ts-contact-wa strong{font-size:22px}
-}
-@media (max-width:600px){
-  .ts-footer-inner{text-align:center}
-}
+<style type="text/css">:root{--card:#fff;--line:#e5e7eb;--text:#111827;--muted:#6b7280;--accent:#e30613;--accent-strong:#c40010;--green:#25D366;--shadow:0 10px 28px rgba(0,0,0,.06);--shadow-hover:0 14px 34px rgba(0,0,0,.10)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#f7f8fa 0%,#f1f3f6 100%);color:var(--text)}img{max-width:100%;display:block}button,input,textarea{font:inherit}a{text-decoration:none}
+.ts-page{max-width:780px;margin:0 auto;padding:10px 14px 120px}.ts-card{background:var(--card);border:3px solid var(--accent);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;margin-top:18px;position:relative}.ts-progress{height:8px;background:#eceff3;position:relative}.ts-progress>span{position:absolute;left:0;top:0;bottom:0;width:14.285%;background:linear-gradient(90deg,var(--accent) 0%,#ff2a36 100%);transition:width .28s ease}
+.ts-step{display:none;padding:24px 20px 22px;opacity:0;transform:translateX(24px) scale(.985);transition:opacity .35s ease,transform .35s ease}.ts-step.ts-active{display:block;opacity:1;transform:translateX(0) scale(1);animation:tsStepIn .35s ease}@keyframes tsStepIn{from{opacity:0;transform:translateX(24px) scale(.985)}to{opacity:1;transform:translateX(0) scale(1)}}
+.ts-step-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:18px}.ts-step-no{display:inline-flex;align-items:center;padding:7px 12px;border-radius:999px;background:#fff1f2;border:1px solid #ffd5d9;color:var(--accent);font-size:13px;font-weight:800;margin-bottom:10px}.ts-back{border:0;background:none;color:var(--accent);font-weight:800;cursor:pointer;padding:6px 0}.ts-step h2{margin:0 0 8px;font-size:30px;line-height:1.08;color:#111}.ts-step p{margin:0;color:var(--muted);font-size:16px;line-height:1.55}
+.ts-model-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:18px}.ts-model-card{position:relative;border:2px solid #e5e7eb;border-radius:24px;overflow:hidden;background:#fff;cursor:pointer;transition:.22s ease}.ts-model-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}.ts-model-card.ts-selected{border-color:var(--accent);box-shadow:0 0 0 4px rgba(227,6,19,.10)}.ts-model-media{min-height:220px;display:flex;align-items:center;justify-content:center;padding:18px 18px 10px;background:linear-gradient(180deg,#fafafa 0%,#f3f4f6 100%)}.ts-model-media img{width:100%;max-height:185px;object-fit:contain}.ts-model-body{padding:14px 16px 18px;text-align:center}.ts-model-sub{display:inline-block;font-size:11px;color:#b91c1c;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px;font-weight:800;background:#fff1f2;border:1px solid #ffd5d9;padding:6px 10px;border-radius:999px}.ts-model-title{font-size:24px;font-weight:900;line-height:1.05;margin:0 0 8px;color:#111}.ts-model-desc{color:#6b7280;font-size:14px;line-height:1.55}.ts-check{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:999px;background:#fff;border:2px solid #e5e7eb;display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff}.ts-model-card.ts-selected .ts-check{background:var(--accent);border-color:var(--accent)}
+.ts-preview{margin-top:18px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:24px;padding:16px}.ts-preview-figure{background:#fff;border:1px solid #edf0f3;border-radius:18px;min-height:230px;display:flex;align-items:center;justify-content:center;padding:16px}.ts-preview-figure img{width:100%;max-height:185px;object-fit:contain}.ts-preview-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.ts-chip{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;background:#fff;border:1px solid #e5e7eb;border-radius:999px;font-size:13px;font-weight:800;color:#374151}.ts-dot{width:16px;height:16px;border-radius:999px;border:1px solid rgba(0,0,0,.15);display:inline-block}
+.ts-color-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.ts-color-card{border:2px solid #e5e7eb;border-radius:22px;padding:14px 10px;background:#fff;text-align:center;cursor:pointer;transition:.22s ease}.ts-color-card.ts-selected{border-color:var(--accent);box-shadow:0 0 0 4px rgba(227,6,19,.10)}.ts-color-swatch{width:56px;height:56px;border-radius:999px;margin:0 auto 10px;border:2px solid rgba(0,0,0,.12)}.ts-color-card strong{display:block;font-size:14px;line-height:1.3;color:#111827}.ts-color-card span{display:block;margin-top:5px;font-size:12px;color:#6b7280}
+.ts-option-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:18px}.ts-option-card{border:2px solid #e5e7eb;border-radius:24px;padding:18px;background:#fff;cursor:pointer}.ts-option-card.ts-selected{border-color:var(--accent);box-shadow:0 0 0 4px rgba(227,6,19,.10);background:linear-gradient(180deg,#fff 0%,#fff8f8 100%)}.ts-option-card strong{display:block;font-size:24px;line-height:1.1;margin-bottom:8px;color:#111}.ts-option-card p{margin:0;font-size:15px;color:#6b7280}
+.ts-shape-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.ts-shape-card{border:2px solid #e5e7eb;border-radius:24px;padding:18px;text-align:center;background:#fff;cursor:pointer}.ts-shape-card.ts-selected{border-color:var(--accent);background:linear-gradient(180deg,#fff 0%,#fff5f5 100%);color:var(--accent);box-shadow:0 0 0 4px rgba(227,6,19,.10)}.ts-shape-icon{width:100%;max-width:120px;margin:0 auto 12px;height:66px;display:flex;align-items:center;justify-content:center}.ts-shape-icon svg{width:100%;height:100%}.ts-shape-card strong{font-size:22px;display:block;margin-bottom:6px}.ts-shape-card span{font-size:14px;color:inherit;opacity:.85}
+.ts-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.ts-field label{display:block;margin-bottom:7px;font-size:14px;font-weight:800;color:#4b5563}.ts-input{width:100%;height:74px;border:2px solid #e5e7eb;border-radius:20px;background:#fff;padding:0 18px;font-size:32px;font-weight:900;color:#374151;outline:none}.ts-input:focus{border-color:var(--accent);box-shadow:0 0 0 4px rgba(227,6,19,.10)}.ts-input.ts-error{border-color:#d12c2c!important;box-shadow:0 0 0 4px rgba(209,44,44,.10)!important;background:#fff9f9}.ts-help-box{margin-top:16px;padding:14px 16px;border-radius:18px;background:#fff5f5;border:1px solid #ffd5d9;color:#9f1239;font-size:14px;line-height:1.55}
+.ts-city-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}.ts-city-btn{min-height:74px;border:1px solid #e5e7eb;border-radius:20px;background:#f9fafb;color:#374151;font-weight:900;font-size:16px;cursor:pointer;padding:10px}.ts-city-btn.ts-selected{background:var(--accent);color:#fff;border-color:var(--accent)}.ts-city-other{margin-top:14px;display:none}.ts-city-other.ts-show{display:block}
+.ts-estimate{margin-top:20px;background:linear-gradient(180deg,#f9fafb 0%,#f3f4f6 100%);border-radius:24px;padding:18px;border:1px solid #e5e7eb}.ts-estimate-label{color:#b91c1c;text-transform:uppercase;font-size:13px;font-weight:900;letter-spacing:1px;margin-bottom:12px}.ts-estimate-row{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding:10px 0;border-bottom:1px solid #e5e7eb}.ts-estimate-row:last-child{border-bottom:0}.ts-estimate-total{color:var(--accent);font-size:34px;font-weight:900;line-height:1}.ts-estimate-note{margin-top:12px;color:#6b7280;font-size:14px;line-height:1.6}
+.ts-contact-box{margin-top:18px}.ts-contact-box .ts-field+.ts-field{margin-top:14px}.ts-contact-box .ts-input{font-size:22px;font-weight:800}.ts-submit-row{display:grid;gap:12px;margin-top:18px}.ts-btn{width:100%;min-height:74px;border:0;border-radius:20px;font-size:20px;font-weight:900;cursor:pointer;transition:.22s ease}.ts-btn-main{background:#f3d2d5;color:#fff}.ts-btn-main.ts-strong,.ts-btn-enabled{background:linear-gradient(135deg,var(--accent) 0%,var(--accent-strong) 100%)!important;color:#fff!important;cursor:pointer!important;pointer-events:auto;box-shadow:0 10px 22px rgba(227,6,19,.20)}.ts-btn-disabled{background:#f3d2d5!important;color:rgba(255,255,255,.96)!important;cursor:not-allowed!important;opacity:.94;pointer-events:none}.ts-btn-dark{background:linear-gradient(135deg,#111 0%,#222 100%);color:#fff}.ts-direct{text-align:center;margin-top:14px;color:#6b7280;font-size:17px}.ts-direct a{color:var(--accent);font-weight:900}
+.ts-floating-bar{position:fixed;left:0;right:0;bottom:0;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(244,245,247,.96);backdrop-filter:blur(10px);z-index:40;border-top:1px solid rgba(0,0,0,.05)}.ts-floating-inner{max-width:760px;margin:0 auto;display:grid;grid-template-columns:1fr;gap:10px}.ts-mini-btn{min-height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;gap:10px;color:#fff;font-size:18px;font-weight:900;border:0;cursor:pointer;box-shadow:0 10px 22px rgba(0,0,0,.12)}.ts-mini-btn svg{width:22px;height:22px}
+.ts-thank{text-align:center;padding-top:10px}.ts-thank-icon{width:120px;height:120px;border-radius:999px;background:#e8f7ee;color:var(--green);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:58px;font-weight:900}.ts-thank h3{margin:0 0 10px;font-size:34px;color:#111}.ts-thank p{margin:0 auto 18px;max-width:560px;color:#6b7280;font-size:18px;line-height:1.6}.ts-thank-summary{margin-top:18px;background:linear-gradient(180deg,#f9fafb 0%,#f3f4f6 100%);border:1px solid #e5e7eb;border-radius:24px;padding:18px;text-align:left}.ts-thank-row{display:flex;justify-content:space-between;gap:14px;padding:8px 0;font-size:17px;border-bottom:1px solid #e5e7eb}.ts-thank-row:last-child{border-bottom:0}.ts-thank-row strong{text-align:right}.ts-hidden-copy{position:absolute;left:-9999px;top:-9999px;opacity:0;pointer-events:none}
+@media(max-width:640px){.ts-page{padding-left:10px;padding-right:10px}.ts-step h2{font-size:24px}.ts-grid-2{grid-template-columns:1fr}.ts-color-grid{grid-template-columns:repeat(2,1fr)}.ts-city-grid{grid-template-columns:repeat(2,1fr)}.ts-input{font-size:28px;height:70px}.ts-btn{font-size:18px}}
+@media(min-width:900px){.ts-page{max-width:1180px!important;padding:30px 24px 140px!important}.ts-card{width:100%!important;max-width:100%!important}.ts-step{padding:34px 38px 34px!important}.ts-model-grid{grid-template-columns:repeat(2,1fr)!important}.ts-color-grid{grid-template-columns:repeat(4,1fr)!important}.ts-city-grid{grid-template-columns:repeat(4,1fr)!important}.ts-option-grid{grid-template-columns:repeat(3,1fr)!important}.ts-floating-inner{max-width:1180px!important}}
+@media(min-width:1200px){.ts-page{max-width:1280px!important}.ts-model-grid{grid-template-columns:repeat(3,1fr)!important}}
 </style>
-</head>
-<body>
+<div class="ts-page">
+<div class="ts-card">
+<div class="ts-progress">&nbsp;</div>
 
-<div class="ts-recalc" id="tsRecalcNotice">Recalculat</div>
+<section class="ts-step ts-active" data-step="1">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 1 из 7</div>
 
-<div class="ts-wrap">
-  <div class="ts-hero">
-    <h1>Gard sau acoperiș? Află prețul | TotulShop.md</h1>
-    <p>Introdu dimensiunile pentru a obține rapid o ofertă estimativă pentru acoperiș sau gard metalic. Poți exporta oferta și ne poți contacta direct.</p>
-  </div>
+<h2>Выберите модель металлочерепицы</h2>
 
-  <div class="ts-tabs">
-    <button class="ts-tab ts-active" id="tabRoof" type="button">Acoperiș</button>
-    <button class="ts-tab" id="tabFence" type="button">Gard</button>
-    <button class="ts-tab" id="tabProjects" type="button">Proiectele noastre</button>
-  </div>
-
-  <div id="sectionRoof" class="ts-section ts-active">
-    <div class="ts-layout">
-      <div class="ts-card">
-        <h2 class="ts-title">Configurator acoperiș</h2>
-
-        <div class="ts-section-title">1. Date client</div>
-        <div class="ts-grid">
-          <div>
-            <label class="ts-label" for="rClientName">Nume client</label>
-            <input class="ts-input roof-field" id="rClientName" type="text">
-          </div>
-          <div>
-            <label class="ts-label" for="rClientPhone">Telefon client</label>
-            <input class="ts-input roof-field" id="rClientPhone" type="tel">
-          </div>
-          <div class="ts-full">
-            <label class="ts-label" for="rClientCity">Localitate</label>
-            <input class="ts-input roof-field" id="rClientCity" type="text">
-          </div>
-        </div>
-
-        <div class="ts-section-title">2. Model țiglă metalică</div>
-        <input id="rModel" type="hidden" value="dakia">
-        <div class="ts-cards" id="rModelCards"></div>
-
-        <div class="ts-section-title">3. Culoare acoperiș</div>
-        <input id="rColor" type="hidden" value="7016">
-        <div class="ts-colors" id="rColors"></div>
-
-        <div class="ts-section-title">4. Formă și dimensiuni</div>
-        <div class="ts-pills" id="rTypePills" style="margin-bottom:14px;">
-          <button class="ts-pill ts-selected" data-type="2ape" type="button">2<br>ape</button>
-          <button class="ts-pill" data-type="4ape" type="button">4<br>ape</button>
-        </div>
-
-        <div class="ts-grid">
-          <div>
-            <label class="ts-label" for="rLength">Lungime casă (m)</label>
-            <input class="ts-input roof-field" id="rLength" type="number" min="1" step="0.1" value="12">
-          </div>
-          <div>
-            <label class="ts-label" for="rWidth">Lățime casă (m)</label>
-            <input class="ts-input roof-field" id="rWidth" type="number" min="1" step="0.1" value="10">
-          </div>
-          <div>
-            <label class="ts-label" for="rSlope">Pantă acoperiș (%)</label>
-            <input class="ts-input roof-field" id="rSlope" type="number" min="1" step="1" value="35">
-          </div>
-          <div>
-            <label class="ts-label" for="rEave">Streașină / ieșire (cm)</label>
-            <input class="ts-input roof-field" id="rEave" type="number" min="0" step="1" value="60">
-          </div>
-        </div>
-
-        <div class="ts-section-title">5. Opțiuni acoperiș</div>
-        <div class="ts-pills" id="rOptionPills">
-          <button class="ts-pill" data-key="turnkey" type="button">Acoperiș<br>la cheie</button>
-          <button class="ts-pill ts-selected" data-key="accessories" type="button">Accesorii<br>incluse</button>
-        </div>
-
-        <div style="margin-top:14px">
-          <label class="ts-label" for="rComment">Descriere client</label>
-          <textarea class="ts-textarea roof-field" id="rComment"></textarea>
-        </div>
-      </div>
-
-      <div class="ts-card ts-summary">
-        <div class="ts-preview">
-          <img id="sImage" src="https://krovli.lider.md/sites/default/files/2025-10/Dakia_7024_0.png" alt="Produs selectat" loading="lazy">
-          <div class="ts-badge">
-            <span class="ts-dot" id="sDot" style="background:#383E42;"></span>
-            <span id="sColorName">Antracit 7016</span>
-          </div>
-        </div>
-
-        <div class="ts-meta">
-          <div><strong id="sModel">Model</strong>Model selectat</div>
-          <div><strong id="sSize">0 × 0 m</strong>Dimensiune calculată</div>
-        </div>
-
-        <div class="ts-price">
-          <div>Total estimativ</div>
-          <p><strong id="sPrice">0 lei</strong></p>
-        </div>
-
-        <div class="ts-row">
-          <div><small>Suprafață</small>calcul estimativ</div>
-          <p><strong id="sArea">0 m²</strong></p>
-        </div>
-
-        <div class="ts-row">
-          <div><small>Opțiune selectată</small>pachet final</div>
-          <p><strong id="sPackage">-</strong></p>
-        </div>
-
-        <div class="ts-box">
-          <div class="ts-box-title" id="sSpecTitle">Detalii produs</div>
-          <p class="ts-box-text" id="sSpecText">Alege produsul pentru a vedea descrierea.</p>
-        </div>
-
-        <div class="ts-example" id="sExample" style="display:none;"></div>
-
-        <div class="ts-actions">
-          <button class="ts-btn-main ts-btn-wa" id="btnWaRoof" type="button">📲 Cere Oferta WhatsApp</button>
-          <button class="ts-btn-main ts-btn-ms" id="btnMsRoof" type="button">💬 Cere Oferta Messenger</button>
-        </div>
-
-        <div class="ts-actions">
-          <button class="ts-btn-main ts-btn-light" id="btnImgRoof" type="button">🖼 Salvează imagine</button>
-          <button class="ts-btn-main ts-btn-light" id="btnPdfRoof" type="button">📄 Export PDF</button>
-          <button class="ts-btn-main ts-btn-light" id="btnPrintRoof" type="button">🖨 Printează</button>
-        </div>
-
-        <div class="ts-copy">
-          <div class="ts-note" style="margin-top:0">Messenger nu completează mereu automat textul. Mesajul de mai jos se copiază pentru lipire manuală.</div>
-          <textarea class="ts-textarea" id="copyMessageRoof" readonly></textarea>
-        </div>
-
-        <div class="ts-note" id="sDescription">Alege produsul și modifică valorile. Recalcularea este automată.</div>
-      </div>
-    </div>
-
-    <div class="ts-contact">
-      <div class="ts-contact-left">
-        <span class="ts-contact-kicker">TotulShop.md</span>
-        <h3>Discută direct cu un consultant</h3>
-        <p>Te ajutăm rapid cu alegerea soluției potrivite pentru acoperișuri și garduri metalice. Primești ofertă clară, fără complicații.</p>
-        <div class="ts-contact-points">
-          <span>✔ Consultanță gratuită</span>
-          <span>✔ Răspuns rapid</span>
-          <span>✔ Livrare în toată Moldova</span>
-        </div>
-      </div>
-      <div class="ts-contact-right">
-        <a href="tel:+37379980247" class="ts-contact-main">
-          <small>Telefon</small>
-          <strong>079 980 247</strong>
-        </a>
-        <a href="https://wa.me/37379980247" class="ts-contact-wa">
-          <small>Scrie-ne rapid</small>
-          <strong>WhatsApp</strong>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div id="sectionFence" class="ts-section">
-    <div class="ts-layout">
-      <div class="ts-card">
-        <h2 class="ts-title">Configurator gard</h2>
-
-        <div class="ts-section-title">1. Date client</div>
-        <div class="ts-grid">
-          <div>
-            <label class="ts-label" for="fClientName">Nume client</label>
-            <input class="ts-input fence-field" id="fClientName" type="text">
-          </div>
-          <div>
-            <label class="ts-label" for="fClientPhone">Telefon client</label>
-            <input class="ts-input fence-field" id="fClientPhone" type="tel">
-          </div>
-          <div class="ts-full">
-            <label class="ts-label" for="fClientCity">Localitate</label>
-            <input class="ts-input fence-field" id="fClientCity" type="text">
-          </div>
-        </div>
-
-        <div class="ts-section-title">2. Model gard</div>
-        <input id="fModel" type="hidden" value="sipca">
-        <div class="ts-cards" id="fModelCards"></div>
-
-        <div class="ts-section-title">3. Culoare gard</div>
-        <input id="fColor" type="hidden" value="7016">
-        <div class="ts-colors" id="fColors"></div>
-
-        <div class="ts-section-title">4. Dimensiuni</div>
-        <div class="ts-grid">
-          <div>
-            <label class="ts-label" for="fLength">Lungime gard (m)</label>
-            <input class="ts-input fence-field" id="fLength" type="number" min="1" step="0.1" value="24">
-          </div>
-          <div>
-            <label class="ts-label" for="fHeight">Înălțime gard (m)</label>
-            <input class="ts-input fence-field" id="fHeight" type="number" min="0.5" step="0.1" value="1.8">
-          </div>
-          <div>
-            <label class="ts-label" for="fPanelWidth">Lățime panou (m)</label>
-            <input class="ts-input fence-field" id="fPanelWidth" type="number" min="0.5" step="0.1" value="2.5">
-          </div>
-          <div>
-            <label class="ts-label" for="fPostSpacing">Distanță stâlpi (m)</label>
-            <input class="ts-input fence-field" id="fPostSpacing" type="number" min="0.5" step="0.1" value="2.5">
-          </div>
-        </div>
-
-        <div class="ts-section-title">5. Opțiuni</div>
-        <div class="ts-pills" id="fOptionPills">
-          <button class="ts-pill" data-key="turnkey" type="button">Gard la<br>cheie</button>
-          <button class="ts-pill" data-key="oldremoval" type="button">Demontare<br>gard vechi</button>
-          <button class="ts-pill" data-key="foundation" type="button">Doresc<br>fundație</button>
-        </div>
-
-        <div id="fFoundationWrap" style="margin-top:14px;display:none;">
-          <div class="ts-grid">
-            <div>
-              <label class="ts-label" for="fFoundationLength">Lungime fundație (m)</label>
-              <input class="ts-input fence-field" id="fFoundationLength" type="number" min="0" step="0.1" value="24">
-            </div>
-            <div>
-              <label class="ts-label" for="fFoundationWidth">Lățime fundație (m)</label>
-              <input class="ts-input fence-field" id="fFoundationWidth" type="number" min="0" step="0.01" value="0.30">
-            </div>
-            <div>
-              <label class="ts-label" for="fFoundationHeight">Înălțime fundație (m)</label>
-              <input class="ts-input fence-field" id="fFoundationHeight" type="number" min="0" step="0.01" value="0.50">
-            </div>
-            <div>
-              <label class="ts-label" for="fFoundationPrice">Preț fundație / m³ (lei)</label>
-              <input class="ts-input fence-field" id="fFoundationPrice" type="number" min="0" step="1" value="2900">
-            </div>
-          </div>
-        </div>
-
-        <div style="margin-top:14px">
-          <label class="ts-label" for="fComment">Comentariu client</label>
-          <textarea class="ts-textarea fence-field" id="fComment"></textarea>
-        </div>
-      </div>
-
-      <div class="ts-card ts-summary">
-        <div class="ts-preview">
-          <img id="fSummaryImage" src="https://krovli.lider.md/sites/default/files/2025-10/%D1%88%D1%82%D0%B0%D0%BA%D0%B5%D1%82%D0%BD%D0%B8%D0%BA.png" alt="Gard selectat" loading="lazy">
-          <div class="ts-badge">
-            <span class="ts-dot" id="fSummaryDot" style="background:#383E42;"></span>
-            <span id="fSummaryColorName">Antracit 7016</span>
-          </div>
-        </div>
-
-        <div class="ts-meta">
-          <div><strong id="fSummaryModel">Model</strong>Model selectat</div>
-          <div><strong id="fSummarySize">0 × 0 m</strong>Dimensiune calculată</div>
-        </div>
-
-        <div class="ts-price">
-          <div>Total estimativ</div>
-          <p><strong id="fSummaryPrice">0 lei</strong></p>
-        </div>
-
-        <div class="ts-row">
-          <div><small>Suprafață</small>calcul estimativ</div>
-          <p><strong id="fSummaryArea">0 m²</strong></p>
-        </div>
-
-        <div class="ts-row">
-          <div><small>Opțiune selectată</small>pachet final</div>
-          <p><strong id="fSummaryPackage">-</strong></p>
-        </div>
-
-        <div class="ts-box">
-          <div class="ts-box-title" id="fSummarySpecTitle">Detalii produs</div>
-          <p class="ts-box-text" id="fSummarySpecText">Alege produsul pentru a vedea descrierea.</p>
-        </div>
-
-        <div class="ts-actions">
-          <button class="ts-btn-main ts-btn-wa" id="btnWaFence" type="button">📲 Cere Oferta WhatsApp</button>
-          <button class="ts-btn-main ts-btn-ms" id="btnMsFence" type="button">💬 Cere Oferta Messenger</button>
-        </div>
-
-        <div class="ts-actions">
-          <button class="ts-btn-main ts-btn-light" id="btnImgFence" type="button">🖼 Salvează imagine</button>
-          <button class="ts-btn-main ts-btn-light" id="btnPdfFence" type="button">📄 Export PDF</button>
-          <button class="ts-btn-main ts-btn-light" id="btnPrintFence" type="button">🖨 Printează</button>
-        </div>
-
-        <div class="ts-copy">
-          <div class="ts-note" style="margin-top:0">Messenger nu completează mereu automat textul. Mesajul de mai jos se copiază pentru lipire manuală.</div>
-          <textarea class="ts-textarea" id="copyMessageFence" readonly></textarea>
-        </div>
-
-        <div class="ts-note" id="fSummaryDescription">Alege produsul și modifică valorile. Recalcularea este automată.</div>
-      </div>
-    </div>
-
-    <div class="ts-contact">
-      <div class="ts-contact-left">
-        <span class="ts-contact-kicker">TotulShop.md</span>
-        <h3>Discută direct cu un consultant</h3>
-        <p>Te ajutăm rapid cu alegerea soluției potrivite pentru acoperișuri și garduri metalice. Primești ofertă clară, fără complicații.</p>
-        <div class="ts-contact-points">
-          <span>✔ Consultanță gratuită</span>
-          <span>✔ Răspuns rapid</span>
-          <span>✔ Livrare în toată Moldova</span>
-        </div>
-      </div>
-      <div class="ts-contact-right">
-        <a href="tel:+37379980247" class="ts-contact-main">
-          <small>Telefon</small>
-          <strong>079 980 247</strong>
-        </a>
-        <a href="https://wa.me/37379980247" class="ts-contact-wa">
-          <small>Scrie-ne rapid</small>
-          <strong>WhatsApp</strong>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div id="sectionProjects" class="ts-section">
-    <div class="ts-card">
-      <h2 class="ts-title">Proiectele noastre</h2>
-
-      <div class="ts-grid">
-        <div class="ts-project-card">
-          <div class="ts-project-video">
-            <iframe src="https://www.youtube.com/embed/IPHZloU3xK4" title="Proiect acoperiș" allowfullscreen></iframe>
-          </div>
-          <div class="ts-project-body">
-            <h3>Proiect acoperiș metalic</h3>
-            <p>Execuție atent realizată, cu accent pe durabilitate, aspect modern și integrare armonioasă în arhitectura casei.</p>
-            <button class="ts-btn-main ts-btn-light" type="button" onclick="showRoof()">Calculator acoperiș</button>
-          </div>
-        </div>
-
-        <div class="ts-project-card">
-          <div class="ts-project-video">
-            <iframe src="https://www.youtube.com/embed/NpdmTGESSNM" title="Proiect gard" allowfullscreen></iframe>
-          </div>
-          <div class="ts-project-body">
-            <h3>Proiect gard metalic</h3>
-            <p>Soluție solidă și estetică pentru delimitarea proprietății, cu design modern și rezistență în timp.</p>
-            <button class="ts-btn-main ts-btn-light" type="button" onclick="showFence()">Calculator gard</button>
-          </div>
-        </div>
-
-        <div class="ts-project-card ts-full">
-          <div class="ts-project-video">
-            <iframe src="https://www.youtube.com/embed/_gt0Yww8c1A" title="Proiect complet" allowfullscreen></iframe>
-          </div>
-          <div class="ts-project-body">
-            <h3>Proiect complet</h3>
-            <p>Un proiect complex care evidențiază transformarea completă de la plan la rezultat final.</p>
-            <button class="ts-btn-main ts-btn-light" type="button" onclick="showRoof()">Calculează ofertă</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="ts-contact">
-      <div class="ts-contact-left">
-        <span class="ts-contact-kicker">TotulShop.md</span>
-        <h3>Discută direct cu un consultant</h3>
-        <p>Te ajutăm rapid cu alegerea soluției potrivite pentru acoperișuri și garduri metalice. Primești ofertă clară, fără complicații.</p>
-        <div class="ts-contact-points">
-          <span>✔ Consultanță gratuită</span>
-          <span>✔ Răspuns rapid</span>
-          <span>✔ Livrare în toată Moldova</span>
-        </div>
-      </div>
-      <div class="ts-contact-right">
-        <a href="tel:+37379980247" class="ts-contact-main">
-          <small>Telefon</small>
-          <strong>079 980 247</strong>
-        </a>
-        <a href="https://wa.me/37379980247" class="ts-contact-wa">
-          <small>Scrie-ne rapid</small>
-          <strong>WhatsApp</strong>
-        </a>
-      </div>
-    </div>
-  </div>
-
-  <div class="ts-footer">
-    <div class="ts-footer-inner">
-      <img src="https://totulshop.md/content/images/2/240x87l90nn0/76241501513667.webp" alt="TotulShop.md" class="ts-footer-logo">
-      <div class="ts-footer-text">
-        <strong>TotulShop.md</strong>
-        <span>Telefon: 079 980 247</span>
-        <span>Email: totulshop.md@gmail.com</span>
-      </div>
-    </div>
-  </div>
+<p>Выберите нужную модель. После этого можно выбрать цвет.</p>
+</div>
 </div>
 
-<div class="ts-export-wrap">
-  <div class="ts-export-sheet" id="exportSheet">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:18px;border-bottom:2px solid #f1f1f1;padding-bottom:18px;margin-bottom:18px;">
-      <div>
-        <img src="https://totulshop.md/content/images/2/240x87l90nn0/76241501513667.webp" alt="TotulShop" style="max-width:260px;height:auto;display:block;">
-      </div>
-      <div style="min-width:240px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:14px;">
-        <div style="font-size:12px;text-transform:uppercase;color:#6b7280;font-weight:700;margin-bottom:6px;">Ofertă de preț</div>
-        <div><strong>Nr ofertă:</strong> <span id="exOfferNo">-</span></div>
-        <div><strong>Data:</strong> <span id="exDate">-</span></div>
-        <div><strong>Tip:</strong> <span id="exType">-</span></div>
-      </div>
-    </div>
+<div class="ts-model-grid" id="modelGrid">&nbsp;</div>
+<button class="ts-btn ts-btn-main" id="next1" type="button">Далее &rarr;</button>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px;">
-      <div style="background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:14px;">
-        <div style="font-size:12px;text-transform:uppercase;color:#6b7280;font-weight:700;margin-bottom:6px;">Client</div>
-        <div><strong>Nume:</strong> <span id="exClientName">-</span></div>
-        <div><strong>Telefon:</strong> <span id="exClientPhone">-</span></div>
-        <div><strong>Localitate:</strong> <span id="exClientCity">-</span></div>
-      </div>
-      <div style="background:#ff0000;color:#fff;border-radius:16px;padding:14px;">
-        <div style="font-size:12px;text-transform:uppercase;opacity:.9;font-weight:700;margin-bottom:6px;">Total estimativ</div>
-        <div id="exTotal" style="font-size:34px;font-weight:900;line-height:1;">0 lei</div>
-        <div style="margin-top:8px;font-size:13px;opacity:.95;">Ofertă generată automat din configurator</div>
-      </div>
-    </div>
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
 
-    <div style="display:grid;grid-template-columns:320px 1fr;gap:18px;margin-bottom:18px;">
-      <div>
-        <div style="border:1px solid #e5e7eb;border-radius:18px;overflow:hidden;background:#fff;">
-          <img id="exImage" src="" alt="Produs" style="width:100%;height:260px;object-fit:contain;display:block;background:#f3f4f6;">
-        </div>
-        <div style="margin-top:10px;display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid #e5e7eb;border-radius:14px;padding:10px 12px;">
-          <span class="ts-dot" id="exDot" style="background:#383E42;"></span>
-          <strong id="exColor">Culoare</strong>
-        </div>
-      </div>
+<section class="ts-step" data-step="2">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 2 из 7</div>
 
-      <div>
-        <div style="border:1px solid #e5e7eb;border-radius:18px;overflow:hidden;">
-          <table style="width:100%;border-collapse:collapse;">
-            <thead>
-              <tr>
-                <th style="background:#111;color:#fff;text-align:left;padding:12px;font-size:13px;">Parametru</th>
-                <th style="background:#111;color:#fff;text-align:left;padding:12px;font-size:13px;">Valoare</th>
-              </tr>
-            </thead>
-            <tbody id="exDetails"></tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<h2>Выберите цвет</h2>
 
-    <div style="margin-bottom:18px;border:1px solid #e5e7eb;border-radius:18px;overflow:hidden;">
-      <table style="width:100%;border-collapse:collapse;">
-        <thead>
-          <tr>
-            <th style="background:#111;color:#fff;text-align:left;padding:12px;font-size:13px;">Descriere</th>
-            <th style="background:#111;color:#fff;text-align:left;padding:12px;font-size:13px;">Valoare</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td style="padding:12px;border-top:1px solid #eef2f7;">Model selectat</td>
-            <td id="exModel" style="padding:12px;border-top:1px solid #eef2f7;font-weight:700;">-</td>
-          </tr>
-          <tr>
-            <td style="padding:12px;border-top:1px solid #eef2f7;">Suprafață calculată</td>
-            <td id="exArea" style="padding:12px;border-top:1px solid #eef2f7;font-weight:700;">0 m²</td>
-          </tr>
-          <tr>
-            <td style="padding:12px;border-top:1px solid #eef2f7;">Opțiune / pachet</td>
-            <td id="exPackage" style="padding:12px;border-top:1px solid #eef2f7;font-weight:700;">-</td>
-          </tr>
-          <tr>
-            <td style="padding:12px;border-top:1px solid #eef2f7;">Descriere</td>
-            <td id="exDesc" style="padding:12px;border-top:1px solid #eef2f7;">-</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<p>Мы оставили доступные цвета для выбранной модели.</p>
+</div>
+<button class="ts-back" data-back="1" type="button">&larr; Назад</button></div>
 
-    <div style="margin-top:auto;background:#111;color:#fff;border-radius:18px;padding:16px;">
-      <div style="font-size:18px;font-weight:800;margin-bottom:8px;">TotulShop.md</div>
-      <div>Telefon: +373 79 980 247</div>
-      <div>Email: TotulShop.md@gmail.com</div>
-    </div>
-  </div>
+<div class="ts-preview">
+<div class="ts-preview-figure"><img alt="Выбранная модель" id="previewImage" loading="lazy" src="" /></div>
+
+<div class="ts-preview-meta">
+<div class="ts-chip"><strong id="previewModelName">-</strong></div>
+
+<div class="ts-chip"><span id="previewColorName">-</span></div>
+</div>
 </div>
 
+<div class="ts-color-grid" id="colorGrid">&nbsp;</div>
+<button class="ts-btn ts-btn-main" id="next2" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="3">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 3 из 7</div>
+
+<h2>Форма крыши</h2>
+
+<p>Выберите тип крыши для более точного расчета площади.</p>
+</div>
+<button class="ts-back" data-back="2" type="button">&larr; Назад</button></div>
+
+<div class="ts-shape-grid">
+<div class="ts-shape-card ts-selected" data-shape="2ape">
+<div class="ts-shape-icon"><svg fill="none" viewbox="0 0 160 90"><path d="M15 70L80 20L145 70" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></path><path d="M40 70H120" stroke="currentColor" stroke-linecap="round" stroke-width="8"></path></svg></div>
+<strong>2 ската</strong><span>Расчет для крыши в два ската</span></div>
+
+<div class="ts-shape-card" data-shape="4ape">
+<div class="ts-shape-icon"><svg fill="none" viewbox="0 0 160 90"><path d="M20 62L60 35H100L140 62" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></path><path d="M60 35L80 18L100 35" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></path><path d="M45 62H115" stroke="currentColor" stroke-linecap="round" stroke-width="8"></path></svg></div>
+<strong>4 ската</strong><span>Расчет для крыши в четыре ската</span></div>
+</div>
+<button class="ts-btn ts-btn-main" id="next3" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="4">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 4 из 7</div>
+
+<h2>Размеры дома</h2>
+
+<p>Введите длину и ширину дома, уклон и свес.</p>
+</div>
+<button class="ts-back" data-back="3" type="button">&larr; Назад</button></div>
+
+<div class="ts-grid-2">
+<div class="ts-field"><label for="houseLength">Длина (м)</label><input class="ts-input" id="houseLength" min="1" step="0.1" type="number" value="12" /></div>
+
+<div class="ts-field"><label for="houseWidth">Ширина (м)</label><input class="ts-input" id="houseWidth" min="1" step="0.1" type="number" value="10" /></div>
+
+<div class="ts-field"><label for="houseSlope">Уклон (%)</label><input class="ts-input" id="houseSlope" min="1" step="1" type="number" value="35" /></div>
+
+<div class="ts-field"><label for="houseEave">Свес (см)</label><input class="ts-input" id="houseEave" min="0" step="1" type="number" value="60" /></div>
+</div>
+
+<div class="ts-help-box">Формула уклона сохранена. Для крыши в 4 ската отдельно учитываются трапеции, треугольники и корректировка по ребрам.</div>
+<button class="ts-btn ts-btn-main" id="next4" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="5">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 5 из 7</div>
+
+<h2>Выберите пакет</h2>
+
+<p>Можно рассчитать только металлочерепицу, металлочерепицу с аксессуарами или крышу под ключ.</p>
+</div>
+<button class="ts-back" data-back="4" type="button">&larr; Назад</button></div>
+
+<div class="ts-option-grid">
+<div class="ts-option-card ts-selected" data-package="tile"><strong>Только металлочерепица</strong>
+
+<p>Ориентировочный расчет только металлочерепицы.</p>
+</div>
+
+<div class="ts-option-card" data-package="accessories"><strong>Металлочерепица + аксессуары</strong>
+
+<p>К расчету автоматически добавляются аксессуары.</p>
+</div>
+
+<div class="ts-option-card" data-package="turnkey"><strong>Крыша под ключ</strong>
+
+<p>Применяется специальная цена за м&sup2; для полного пакета.</p>
+</div>
+</div>
+<button class="ts-btn ts-btn-main" id="next5" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="6">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 6 из 7</div>
+
+<h2>Населенный пункт</h2>
+
+<p>Где будет выполняться монтаж крыши?</p>
+</div>
+<button class="ts-back" data-back="5" type="button">&larr; Назад</button></div>
+
+<div class="ts-city-grid" id="cityGrid"><button class="ts-city-btn" data-city="Кишинёв" type="button">Кишинёв</button><button class="ts-city-btn" data-city="Бельцы" type="button">Бельцы</button><button class="ts-city-btn" data-city="Яловены" type="button">Яловены</button><button class="ts-city-btn" data-city="Оргеев" type="button">Оргеев</button><button class="ts-city-btn" data-city="Кагул" type="button">Кагул</button><button class="ts-city-btn" data-city="Унгены" type="button">Унгены</button><button class="ts-city-btn" data-city="Сороки" type="button">Сороки</button><button class="ts-city-btn" data-city="Единцы" type="button">Единцы</button><button class="ts-city-btn" data-city="Комрат" type="button">Комрат</button><button class="ts-city-btn" data-city="Страшены" type="button">Страшены</button><button class="ts-city-btn" data-city="Хынчешты" type="button">Хынчешты</button><button class="ts-city-btn" data-city="Дрокия" type="button">Дрокия</button><button class="ts-city-btn" data-city="Флорешты" type="button">Флорешты</button><button class="ts-city-btn" data-city="Каушаны" type="button">Каушаны</button><button class="ts-city-btn" data-city="Криулены" type="button">Криулены</button><button class="ts-city-btn" data-city="Ниспорены" type="button">Ниспорены</button><button class="ts-city-btn" data-city="Штефан Водэ" type="button">Штефан Водэ</button><button class="ts-city-btn" data-city="Другой населенный пункт" type="button">Другой населенный пункт</button></div>
+
+<div class="ts-city-other" id="cityOtherWrap">
+<div class="ts-field"><label for="cityOther">Укажите населенный пункт</label><input class="ts-input" id="cityOther" placeholder="Например: Чимишлия" type="text" /></div>
+</div>
+<button class="ts-btn ts-btn-main" id="next6" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="7">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 7 из 7</div>
+
+<h2>Итог и ваши данные</h2>
+
+<p>Проверьте расчет и отправьте заявку.</p>
+</div>
+<button class="ts-back" data-back="6" type="button">&larr; Назад</button></div>
+
+<div class="ts-estimate">
+<div class="ts-estimate-label">Расчет стоимости</div>
+
+<div class="ts-estimate-row">
+<div id="summaryLine1">Металлочерепица &times; 0 м&sup2;</div>
+<strong id="summaryPartial">0 лей</strong></div>
+
+<div class="ts-estimate-row"><strong>Итого ориентировочно</strong>
+
+<div class="ts-estimate-total" id="summaryTotal">0 лей</div>
+</div>
+
+<div class="ts-estimate-note" id="summaryNote">Цена ориентировочная. Точное предложение может включать аксессуары, доставку и технические детали.</div>
+</div>
+
+<div class="ts-thank-summary">
+<div class="ts-thank-row"><span>Модель:</span><strong id="sumModel">-</strong></div>
+
+<div class="ts-thank-row"><span>Цвет:</span><strong id="sumColor">-</strong></div>
+
+<div class="ts-thank-row"><span>Форма:</span><strong id="sumShape">-</strong></div>
+
+<div class="ts-thank-row"><span>Площадь:</span><strong id="sumArea">-</strong></div>
+
+<div class="ts-thank-row"><span>Населенный пункт:</span><strong id="sumCity">-</strong></div>
+
+<div class="ts-thank-row"><span>Пакет:</span><strong id="sumPackage">-</strong></div>
+</div>
+
+<div class="ts-contact-box">
+<div class="ts-field"><label for="clientName">Ваше имя</label><input class="ts-input" id="clientName" placeholder="Ваше имя" type="text" /></div>
+
+<div class="ts-field"><label for="clientPhone">Телефон</label><input class="ts-input" id="clientPhone" placeholder="+373 XX XXX XXX" type="tel" /></div>
+</div>
+
+<div class="ts-submit-row"><button class="ts-btn ts-btn-main ts-strong" id="sendWhatsapp" type="button">Запросить предложение</button></div>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="8">
+<div class="ts-thank">
+<div class="ts-thank-icon">✓</div>
+
+<h3 id="thankTitle">Спасибо!</h3>
+
+<p>Заявка отправлена. Мы свяжемся с вами в ближайшее время и подготовим детальное предложение по крыше.</p>
+
+<div class="ts-thank-summary">
+<div class="ts-thank-row"><span>Материал:</span><strong>Металлочерепица</strong></div>
+
+<div class="ts-thank-row"><span>Модель:</span><strong id="thankModel">-</strong></div>
+
+<div class="ts-thank-row"><span>Площадь:</span><strong id="thankArea">-</strong></div>
+
+<div class="ts-thank-row"><span>Ориентировочная сумма:</span><strong id="thankTotal" style="color:var(--accent-strong);">-</strong></div>
+</div>
+
+<div class="ts-submit-row"><button class="ts-btn ts-btn-main ts-strong" id="downloadOfferImage" type="button">Скачать предложение как изображение</button><button class="ts-btn ts-btn-dark" id="restartCalc" type="button">Рассчитать заново</button></div>
+</div>
+</section>
+</div>
+<textarea class="ts-hidden-copy" id="copyBuffer" readonly="readonly"></textarea></div>
+
+<div class="ts-floating-bar">
+<div class="ts-floating-inner"><a class="ts-mini-btn" href="tel:+37379980247" style="background:linear-gradient(135deg,#e30613 0%,#c40010 100%);"><svg fill="none" viewbox="0 0 24 24"><path d="M6.6 10.8c1.8 3.5 3.1 4.8 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3 .6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.7 22 2 13.3 2 2c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1 .2 2 .6 3 .1.4.1.8-.2 1.2L6.6 10.8Z" fill="none" stroke="currentColor" stroke-width="1.7"></path></svg>Позвонить</a></div>
+</div>
+
+<div id="offerExportWrap" style="position:fixed;left:-99999px;top:0;width:430px;background:#fff;z-index:-1;">
+<div id="offerExportCard" style="width:430px;background:#fff;color:#111;padding:22px;font-family:Arial,Helvetica,sans-serif;box-sizing:border-box;border-radius:28px;">
+<div style="font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#9ca3af;font-weight:800;margin-bottom:8px;">Ориентировочное предложение</div>
+
+<div style="font-size:26px;font-weight:900;line-height:1.05;color:#111;margin-bottom:12px;">Металлическая крыша</div>
+
+<div style="background:#f3f4f6;border-radius:22px;padding:14px;margin-bottom:16px;"><img alt="Выбранная крыша" id="expImage" loading="lazy" src="" style="width:100%;height:190px;object-fit:contain;display:block;" /></div>
+
+<div style="background:#fff5f5;border:1px solid #ffd5d9;border-radius:22px;padding:16px;margin-bottom:16px;">
+<div style="font-size:11px;text-transform:uppercase;color:#b91c1c;font-weight:800;letter-spacing:1px;margin-bottom:8px;">Итого ориентировочно</div>
+
+<div id="expTotal" style="font-size:38px;line-height:1;font-weight:900;color:#c40010;">0 лей</div>
+</div>
+
+<div style="border:1px solid #e5e7eb;border-radius:22px;overflow:hidden;margin-bottom:16px;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+	<tbody>
+		<tr>
+			<td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Модель</td>
+			<td id="expModel" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td>
+		</tr>
+		<tr>
+			<td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Цвет</td>
+			<td id="expColorName" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td>
+		</tr>
+		<tr>
+			<td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Форма</td>
+			<td id="expShape" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td>
+		</tr>
+		<tr>
+			<td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Пакет</td>
+			<td id="expPackage" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td>
+		</tr>
+		<tr>
+			<td style="padding:12px;color:#6b7280;">Площадь</td>
+			<td id="expArea" style="padding:12px;font-weight:800;text-align:right;">-</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div style="font-size:12px;color:#9ca3af;">TotulShop.md &bull; +373 79 980 247</div>
+</div>
+</div>
 <script>
 (function(){
-  const WHATSAPP_NUMBER = "37379980247";
-  const MESSENGER_LINK = "https://m.me/61580108250285";
-
-  const ROOF_TILE_PRICE = 135;
-  const ROOF_ACCESSORIES_FACTOR = 0.35;
-  const ROOF_TURNKEY_PRICE = 1350;
-
-  const fenceModels = [
-    {
-      id:"sipca",
-      name:"Gard șipcă metalică",
-      price:420,
-      img:"https://krovli.lider.md/sites/default/files/2025-10/%D1%88%D1%82%D0%B0%D0%BA%D0%B5%D1%82%D0%BD%D0%B8%D0%BA.png",
-      desc:"Calcul estimativ pentru gard șipcă metalică."
-    },
-    {
-      id:"jaluzea",
-      name:"Gard jaluzea",
-      price:560,
-      img:"https://krovli.lider.md/sites/default/files/2025-09/%D0%B6%D0%B0%D0%BB%D1%8E%D0%B7%D0%B8_.png",
-      desc:"Calcul estimativ pentru gard jaluzea."
-    },
-    {
-      id:"profil",
-      name:"Siding-lamele",
-      price:470,
-      img:"https://krovli.lider.md/sites/default/files/2025-10/siding.png",
-      desc:"Calcul estimativ pentru siding-lamele."
-    }
-  ];
-
-  const roofModels = [
-    {
-      id:"dakia",
-      name:"Țiglă metalică Dakia",
-      img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_7024_0.png",
-      shortDescription:"Formă modernă cu efect 3D și aspect elegant. Profil simetric și montaj ușor.",
-      colors:{
-        "3005":{name:"Roșu vin 3005",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_3005.png"},
-        "3011":{name:"Roșu 3011",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_3011.png"},
-        "3009":{name:"Roșu oxid 3009",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_3009.png"},
-        "5005":{name:"Albastru 5005",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_5005.png"},
-        "6005":{name:"Verde 6005",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_6005.png"},
-        "7016":{name:"Antracit 7016",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_7016.png"},
-        "7024":{name:"Gri grafit 7024",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_7024_0.png"},
-        "8015":{name:"Maro 8015",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_8015.png"},
-        "8017":{name:"Maro ciocolată 8017",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_8017.png"},
-        "8019":{name:"Maro închis 8019",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_8019.png"},
-        "9005":{name:"Negru 9005",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_9005.png"}
-      }
-    },
-    {
-      id:"melano",
-      name:"Țiglă metalică Melano",
-      img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_7024.png",
-      shortDescription:"Design rafinat cu tăietură 3D și îmbinări discrete, pentru un acoperiș elegant.",
-      colors:{
-        "3011":{name:"Roșu 3011",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_3011.png"},
-        "3005":{name:"Roșu vin 3005",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_3005.png"},
-        "3009":{name:"Roșu oxid 3009",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_3009.png"},
-        "5005":{name:"Albastru 5005",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_5005.png"},
-        "6005":{name:"Verde 6005",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_6005.png"},
-        "7016":{name:"Antracit 7016",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_7016.png"},
-        "7024":{name:"Gri grafit 7024",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_7024.png"},
-        "8017":{name:"Maro ciocolată 8017",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_8017.png"},
-        "8019":{name:"Maro închis 8019",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_8019.png"},
-        "9005":{name:"Negru 9005",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_9005.png"},
-        "8015":{name:"Maro 8015",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_8015.png"}
-      }
-    },
-    {
-      id:"lider",
-      name:"Țiglă metalică Lider",
-      img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_7024_0.png",
-      shortDescription:"Profil clasic pentru acoperișuri sigure, cu aspect echilibrat și montaj simplu.",
-      colors:{
-        "3005":{name:"Roșu vin 3005",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_3005.png"},
-        "3011":{name:"Roșu 3011",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_3011.png"},
-        "3009":{name:"Roșu oxid 3009",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_3009.png"},
-        "5005":{name:"Albastru 5005",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_5005.png"},
-        "6005":{name:"Verde 6005",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_6005.png"},
-        "7016":{name:"Antracit 7016",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_7016.png"},
-        "7024":{name:"Gri grafit 7024",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_7024_0.png"},
-        "8015":{name:"Maro 8015",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_8015.png"},
-        "8017":{name:"Maro ciocolată 8017",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_8017.png"},
-        "8019":{name:"Maro închis 8019",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_8019.png"},
-        "9005":{name:"Negru 9005",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_9005.png"}
-      }
-    },
-    {
-      id:"florentia",
-      name:"Țiglă metalică Florenția",
-      img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_7024_0.png",
-      shortDescription:"Profil modern, inspirat de țigla ceramică, pentru un acoperiș elegant și expresiv.",
-      colors:{
-        "3011":{name:"Roșu 3011",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_3011.png"},
-        "3005":{name:"Roșu vin 3005",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_3005.png"},
-        "3009":{name:"Roșu oxid 3009",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_3009.png"},
-        "5005":{name:"Albastru 5005",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_5005.png"},
-        "6005":{name:"Verde 6005",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_6005.png"},
-        "7016":{name:"Antracit 7016",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_7016.png"},
-        "7024":{name:"Gri grafit 7024",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_7024_0.png"},
-        "8015":{name:"Maro 8015",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_8015.png"},
-        "8017":{name:"Maro ciocolată 8017",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_8017.png"},
-        "8019":{name:"Maro închis 8019",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_8019.png"},
-        "9005":{name:"Negru 9005",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_9005.png"}
-      }
-    },
-    {
-      id:"karelia",
-      name:"Țiglă metalică Karelia",
-      img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_7024_0.png",
-      shortDescription:"Profil 3D cu aspect premium și linii expresive, potrivit pentru acoperișuri moderne.",
-      colors:{
-        "3005":{name:"Roșu vin 3005",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_3005.png"},
-        "6005":{name:"Verde 6005",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_6005.png"},
-        "7024":{name:"Gri grafit 7024",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_7024_0.png"},
-        "8015":{name:"Maro 8015",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_8015.png"},
-        "8019":{name:"Maro închis 8019",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_8019.png"},
-        "9005":{name:"Negru 9005",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_9005.png"}
-      }
-    }
-  ];
-
-  const fenceColors = [
-    { id:"7016", name:"Antracit 7016", hex:"#383E42" },
-    { id:"8017", name:"Maro 8017", hex:"#4E2F2A" },
-    { id:"3005", name:"Vișiniu 3005", hex:"#5E2129" },
-    { id:"9005", name:"Negru 9005", hex:"#111111" },
-    { id:"6005", name:"Verde 6005", hex:"#114232" }
-  ];
-
-  const roofColors = [
-    { id:"3005", name:"Roșu vin 3005", hex:"#7b1f29" },
-    { id:"3011", name:"Roșu 3011", hex:"#8a3b2f" },
-    { id:"3009", name:"Roșu oxid 3009", hex:"#6b2c2f" },
-    { id:"5005", name:"Albastru 5005", hex:"#1f4e79" },
-    { id:"6005", name:"Verde 6005", hex:"#114232" },
-    { id:"7016", name:"Antracit 7016", hex:"#383E42" },
-    { id:"7024", name:"Gri grafit 7024", hex:"#4b4f54" },
-    { id:"8015", name:"Maro 8015", hex:"#5a382d" },
-    { id:"8017", name:"Maro ciocolată 8017", hex:"#45322e" },
-    { id:"8019", name:"Maro închis 8019", hex:"#3b2f2f" },
-    { id:"9005", name:"Negru 9005", hex:"#111111" }
-  ];
-
-  const state = {
-    section:"roof",
-    roof:{ type:"2ape", turnkey:false, accessories:true },
-    fence:{ turnkey:false, oldremoval:false, foundation:false }
-  };
-
-  let lastRoofMessage = "";
-  let lastFenceMessage = "";
-  let recalcTimer = null;
-
-  function $(id){ return document.getElementById(id); }
-  function num(v){ const n = parseFloat(String(v).replace(",", ".")); return isNaN(n) ? 0 : n; }
-  function ceilInt(n){ return Math.max(0, Math.ceil(n)); }
-  function money(n){ return Math.round(n).toLocaleString("ro-RO") + " lei"; }
-
-  function showRecalc(){
-    const el = $("tsRecalcNotice");
-    el.classList.add("ts-show");
-    clearTimeout(recalcTimer);
-    recalcTimer = setTimeout(()=>el.classList.remove("ts-show"), 1200);
-  }
-
-  function clearErrors(ids){
-    ids.forEach(id=>{
-      const el = $(id);
-      if(el) el.classList.remove("ts-error");
-    });
-  }
-
-  function validateFields(ids){
-    clearErrors(ids);
-    let ok = true;
-    ids.forEach(id=>{
-      const el = $(id);
-      if(el && !el.value.trim()){
-        el.classList.add("ts-error");
-        ok = false;
-      }
-    });
-    if(!ok) alert("Completați toate câmpurile obligatorii din Date client.");
-    return ok;
-  }
-
-  function setActiveTab(tab){
-    $("tabRoof").classList.remove("ts-active");
-    $("tabFence").classList.remove("ts-active");
-    $("tabProjects").classList.remove("ts-active");
-
-    $("sectionRoof").classList.remove("ts-active");
-    $("sectionFence").classList.remove("ts-active");
-    $("sectionProjects").classList.remove("ts-active");
-
-    state.section = tab;
-
-    if(tab === "roof"){
-      $("tabRoof").classList.add("ts-active");
-      $("sectionRoof").classList.add("ts-active");
-      recalcRoof(false);
-    }else if(tab === "fence"){
-      $("tabFence").classList.add("ts-active");
-      $("sectionFence").classList.add("ts-active");
-      recalcFence(false);
-    }else{
-      $("tabProjects").classList.add("ts-active");
-      $("sectionProjects").classList.add("ts-active");
-    }
-  }
-
-  window.showRoof = function(){ setActiveTab("roof"); };
-  window.showFence = function(){ setActiveTab("fence"); };
-  window.showProjects = function(){ setActiveTab("projects"); };
-
-  $("tabRoof").onclick = ()=>setActiveTab("roof");
-  $("tabFence").onclick = ()=>setActiveTab("fence");
-  $("tabProjects").onclick = ()=>setActiveTab("projects");
-
-  function getRoofModel(){
-    return roofModels.find(x=>x.id === $("rModel").value) || roofModels[0];
-  }
-  function getRoofColor(){
-    return roofColors.find(x=>x.id === $("rColor").value) || roofColors[0];
-  }
-  function roofImageFor(model,colorId){
-    if(model.colors && model.colors[colorId] && model.colors[colorId].img) return model.colors[colorId].img;
-    return model.img;
-  }
-
-  function renderRoofModelCards(){
-    const box = $("rModelCards");
-    box.innerHTML = "";
-    roofModels.forEach(item=>{
-      const el = document.createElement("div");
-      el.className = "ts-model" + ($("rModel").value === item.id ? " ts-selected" : "");
-      el.innerHTML = '<img src="'+item.img+'" alt="'+item.name+'" loading="lazy"><div>'+item.name+'</div>';
-      el.onclick = function(){
-        $("rModel").value = item.id;
-        const model = getRoofModel();
-        const available = Object.keys(model.colors);
-        if(available.indexOf($("rColor").value) === -1) $("rColor").value = available[0];
-        renderRoofModelCards();
-        renderRoofColors();
-        recalcRoof(true);
-      };
-      box.appendChild(el);
-    });
-  }
-
-  function renderRoofColors(){
-    const model = getRoofModel();
-    const box = $("rColors");
-    box.innerHTML = "";
-    if(!model.colors[$("rColor").value]){
-      const keys = Object.keys(model.colors);
-      if(keys.length) $("rColor").value = keys[0];
-    }
-    roofColors.forEach(item=>{
-      if(!model.colors[item.id]) return;
-      const el = document.createElement("button");
-      el.type = "button";
-      el.className = "ts-color" + ($("rColor").value === item.id ? " ts-selected" : "");
-      el.style.background = item.hex;
-      el.innerHTML = "<span>"+item.id+"</span>";
-      el.onclick = function(){
-        $("rColor").value = item.id;
-        renderRoofColors();
-        recalcRoof(true);
-      };
-      box.appendChild(el);
-    });
-  }
-
-  function syncRoofTypePills(){
-    [...$("rTypePills").querySelectorAll(".ts-pill")].forEach(btn=>{
-      btn.classList.toggle("ts-selected", btn.getAttribute("data-type") === state.roof.type);
-    });
-  }
-
-  function syncRoofOptionPills(){
-    [...$("rOptionPills").querySelectorAll(".ts-pill")].forEach(btn=>{
-      const key = btn.getAttribute("data-key");
-      btn.classList.toggle("ts-selected", !!state.roof[key]);
-    });
-  }
-
-  function bindRoofPills(){
-    [...$("rTypePills").querySelectorAll(".ts-pill")].forEach(btn=>{
-      btn.onclick = function(){
-        state.roof.type = this.getAttribute("data-type");
-        syncRoofTypePills();
-        recalcRoof(true);
-      };
-    });
-
-    [...$("rOptionPills").querySelectorAll(".ts-pill")].forEach(btn=>{
-      btn.onclick = function(){
-        const key = this.getAttribute("data-key");
-        state.roof[key] = !state.roof[key];
-        if(key === "turnkey" && state.roof.turnkey) state.roof.accessories = false;
-        if(key === "accessories" && state.roof.accessories) state.roof.turnkey = false;
-        syncRoofOptionPills();
-        recalcRoof(true);
-      };
-    });
-  }
-
-  function roofMath(){
-    const length = num($("rLength").value);
-    const width = num($("rWidth").value);
-    const slopePercent = num($("rSlope").value);
-    const eaveCm = num($("rEave").value);
-
-    const eaveM = eaveCm / 100;
-    const adjLength = length + (eaveM * 2);
-    const adjWidth = width + (eaveM * 2);
-
-    const slopeFactor = Math.sqrt(1 + Math.pow(slopePercent / 100, 2));
-
-    const longSide = Math.max(adjLength, adjWidth);
-    const shortSide = Math.min(adjLength, adjWidth);
-    const halfSpan = shortSide / 2;
-
-    const oneSlopeArea2 = longSide * halfSpan * slopeFactor;
-    const totalArea2 = oneSlopeArea2 * 2;
-
-    const ridgeLength = Math.max(longSide - shortSide, 0);
-    const trapezoidOne = ((ridgeLength + longSide) / 2) * halfSpan * slopeFactor;
-    const trapezoidsTotal = trapezoidOne * 2;
-    const triangleOne = (shortSide * halfSpan / 2) * slopeFactor;
-    const trianglesTotal = triangleOne * 2;
-    const totalArea4 = (trapezoidsTotal + trianglesTotal) * 1.08;
-
-    return {
-      length,width,slopePercent,eaveCm,
-      type:state.roof.type,
-      totalArea: state.roof.type === "4ape" ? totalArea4 : totalArea2,
-      oneSlopeArea2
-    };
-  }
-
-  function recalcRoof(showNoticeFlag){
-    const model = getRoofModel();
-    const color = getRoofColor();
-    const d = roofMath();
-    const colorData = model.colors[color.id] ? model.colors[color.id] : null;
-
-    const baseCost = d.totalArea * ROOF_TILE_PRICE;
-    const accessoriesCost = state.roof.accessories ? baseCost * ROOF_ACCESSORIES_FACTOR : 0;
-    const turnkeyCost = state.roof.turnkey ? d.totalArea * ROOF_TURNKEY_PRICE : 0;
-    const total = state.roof.turnkey ? turnkeyCost : (baseCost + accessoriesCost);
-
-    const typeLabel = d.type === "4ape" ? "4 ape" : "2 ape";
-    const options = [typeLabel];
-    if(state.roof.accessories) options.push("Accesorii incluse");
-    if(state.roof.turnkey) options.push("Acoperiș la cheie");
-
-    $("sImage").src = roofImageFor(model, color.id);
-    $("sModel").textContent = model.name;
-    $("sSize").textContent = d.width + " × " + d.length + " m";
-    $("sColorName").textContent = (colorData ? colorData.name : color.name) + " • " + typeLabel;
-    $("sDot").style.background = color.hex;
-    $("sPrice").textContent = money(total);
-    $("sArea").textContent = d.totalArea.toFixed(2) + " m²";
-    $("sPackage").textContent = options.join(", ");
-    $("sSpecTitle").textContent = model.name;
-    $("sSpecText").textContent = model.shortDescription;
-    $("sDescription").textContent = "Casă " + d.width + " × " + d.length + " m, " + typeLabel + ", pantă " + d.slopePercent + "% → " + d.totalArea.toFixed(2) + " m².";
-
-    let ex = "Casă " + d.width + " × " + d.length + " m, " + typeLabel + ", pantă " + d.slopePercent + "%";
-    if(d.eaveCm > 0) ex += ", streașină " + d.eaveCm + " cm";
-    ex += " → suprafață estimativă acoperiș: <strong>" + d.totalArea.toFixed(2) + " m²</strong>.";
-    if(d.type === "2ape") ex += " O apă ≈ " + d.oneSlopeArea2.toFixed(2) + " m².";
-    else ex += " La 4 ape, suprafața este mai mare deoarece include două trapeze, două triunghiuri și corecție pentru muchii.";
-    ex += " Calculul este orientativ și nu include pierderile din tăieri și suprapuneri.";
-    $("sExample").innerHTML = ex;
-    $("sExample").style.display = "block";
-
-    lastRoofMessage = [
-      "Salut! Doresc ofertă pentru acoperiș.",
-      "",
-      "Date client:",
-      "Nume: " + ($("rClientName").value.trim() || "-"),
-      "Telefon: " + ($("rClientPhone").value.trim() || "-"),
-      "Localitate: " + ($("rClientCity").value.trim() || "-"),
-      "",
-      "Detalii produs:",
-      "Model: " + model.name,
-      "Culoare: " + (colorData ? colorData.name : color.name),
-      "Tip acoperiș: " + typeLabel,
-      "Descriere: " + model.shortDescription,
-      "Lungime casă: " + d.length + " m",
-      "Lățime casă: " + d.width + " m",
-      "Pantă: " + d.slopePercent + "%",
-      "Streașină: " + d.eaveCm + " cm",
-      "Suprafață estimativă acoperiș: " + d.totalArea.toFixed(2) + " m²",
-      "Preț țiglă metalică: 135 lei/m²",
-      state.roof.accessories ? "Accesorii: +35%" : "",
-      state.roof.turnkey ? "Preț la cheie: 1350 lei/m²" : "",
-      "Opțiuni: " + options.join(", "),
-      $("rComment").value.trim() ? "Descriere client: " + $("rComment").value.trim() : "",
-      "",
-      "Total estimativ: " + money(total)
-    ].filter(Boolean).join("\n");
-
-    $("copyMessageRoof").value = lastRoofMessage;
-    if(showNoticeFlag) showRecalc();
-  }
-
-  function getFenceModel(){
-    return fenceModels.find(x=>x.id === $("fModel").value) || fenceModels[0];
-  }
-  function getFenceColor(){
-    return fenceColors.find(x=>x.id === $("fColor").value) || fenceColors[0];
-  }
-
-  function renderFenceModelCards(){
-    const box = $("fModelCards");
-    box.innerHTML = "";
-    fenceModels.forEach(item=>{
-      const el = document.createElement("div");
-      el.className = "ts-model" + ($("fModel").value === item.id ? " ts-selected" : "");
-      el.innerHTML = '<img src="'+item.img+'" alt="'+item.name+'" loading="lazy"><div>'+item.name+'</div>';
-      el.onclick = function(){
-        $("fModel").value = item.id;
-        renderFenceModelCards();
-        recalcFence(true);
-      };
-      box.appendChild(el);
-    });
-  }
-
-  function renderFenceColors(){
-    const box = $("fColors");
-    box.innerHTML = "";
-    fenceColors.forEach(item=>{
-      const el = document.createElement("button");
-      el.type = "button";
-      el.className = "ts-color" + ($("fColor").value === item.id ? " ts-selected" : "");
-      el.style.background = item.hex;
-      el.innerHTML = "<span>"+item.id+"</span>";
-      el.onclick = function(){
-        $("fColor").value = item.id;
-        renderFenceColors();
-        recalcFence(true);
-      };
-      box.appendChild(el);
-    });
-  }
-
-  function syncFenceOptionPills(){
-    [...$("fOptionPills").querySelectorAll(".ts-pill")].forEach(btn=>{
-      const key = btn.getAttribute("data-key");
-      btn.classList.toggle("ts-selected", !!state.fence[key]);
-    });
-    $("fFoundationWrap").style.display = state.fence.foundation ? "block" : "none";
-  }
-
-  function bindFencePills(){
-    [...$("fOptionPills").querySelectorAll(".ts-pill")].forEach(btn=>{
-      btn.onclick = function(){
-        const key = this.getAttribute("data-key");
-
-        if(key === "turnkey"){
-          state.fence.turnkey = !state.fence.turnkey;
-          if(state.fence.turnkey){
-            state.fence.oldremoval = false;
-            state.fence.foundation = false;
-          }
-        }else{
-          state.fence[key] = !state.fence[key];
-          if(state.fence[key]) state.fence.turnkey = false;
-        }
-
-        syncFenceOptionPills();
-        recalcFence(true);
-      };
-    });
-  }
-
-  function recalcFence(showNoticeFlag){
-    const model = getFenceModel();
-    const color = getFenceColor();
-
-    const length = num($("fLength").value);
-    const height = num($("fHeight").value);
-    const panelWidth = num($("fPanelWidth").value);
-    const postSpacing = num($("fPostSpacing").value);
-
-    const foundationLength = num($("fFoundationLength").value);
-    const foundationWidth = num($("fFoundationWidth").value);
-    const foundationHeight = num($("fFoundationHeight").value);
-    const foundationPrice = num($("fFoundationPrice").value);
-
-    const area = length * height;
-    const panels = panelWidth > 0 ? ceilInt(length / panelWidth) : 0;
-    const posts = postSpacing > 0 ? ceilInt(length / postSpacing) + 1 : 0;
-
-    const panelCost = area * model.price;
-    const postsCost = posts * 180;
-    const fittingCost = panels * 35;
-
-    let foundationVolume = 0;
-    let foundationCost = 0;
-    if(state.fence.foundation){
-      foundationVolume = foundationLength * foundationWidth * foundationHeight;
-      foundationCost = foundationVolume * foundationPrice;
-    }
-
-    const oldRemovalCost = state.fence.oldremoval ? length * 80 : 0;
-    const turnkeyCost = state.fence.turnkey ? area * 190 : 0;
-
-    const total = panelCost + postsCost + fittingCost + foundationCost + oldRemovalCost + turnkeyCost;
-
-    const options = [];
-    if(state.fence.turnkey) options.push("Gard la cheie");
-    if(state.fence.foundation) options.push("Fundație");
-    if(state.fence.oldremoval) options.push("Demontare gard vechi");
-
-    $("fSummaryImage").src = model.img;
-    $("fSummaryModel").textContent = model.name;
-    $("fSummarySize").textContent = length + " × " + height + " m";
-    $("fSummaryColorName").textContent = color.name;
-    $("fSummaryDot").style.background = color.hex;
-    $("fSummaryPrice").textContent = money(total);
-    $("fSummaryArea").textContent = area.toFixed(2) + " m²";
-    $("fSummaryPackage").textContent = options.length ? options.join(", ") : "Standard";
-    $("fSummarySpecTitle").textContent = model.name;
-    $("fSummarySpecText").textContent = model.desc;
-    $("fSummaryDescription").textContent = "Calcul estimativ pentru " + model.name + ".";
-
-    lastFenceMessage = [
-      "Salut! Doresc ofertă pentru gard.",
-      "",
-      "Date client:",
-      "Nume: " + ($("fClientName").value.trim() || "-"),
-      "Telefon: " + ($("fClientPhone").value.trim() || "-"),
-      "Localitate: " + ($("fClientCity").value.trim() || "-"),
-      "",
-      "Detalii produs:",
-      "Model: " + model.name,
-      "Culoare: " + color.name,
-      "Lungime: " + length + " m",
-      "Înălțime: " + height + " m",
-      "Lățime panou: " + panelWidth + " m",
-      "Distanță stâlpi: " + postSpacing + " m",
-      "Suprafață: " + area.toFixed(2) + " m²",
-      "Opțiuni: " + (options.length ? options.join(", ") : "-"),
-      state.fence.foundation ? "Volum fundație: " + foundationVolume.toFixed(2) + " m³" : "",
-      $("fComment").value.trim() ? "Comentariu client: " + $("fComment").value.trim() : "",
-      "",
-      "Total estimativ: " + money(total)
-    ].filter(Boolean).join("\n");
-
-    $("copyMessageFence").value = lastFenceMessage;
-    if(showNoticeFlag) showRecalc();
-  }
-
-  function getExportData(type){
-    if(type === "roof"){
-      const model = getRoofModel();
-      const color = getRoofColor();
-      const d = roofMath();
-      const colorData = model.colors[color.id] ? model.colors[color.id] : null;
-
-      const baseCost = d.totalArea * ROOF_TILE_PRICE;
-      const accessoriesCost = state.roof.accessories ? baseCost * ROOF_ACCESSORIES_FACTOR : 0;
-      const turnkeyCost = state.roof.turnkey ? d.totalArea * ROOF_TURNKEY_PRICE : 0;
-      const total = state.roof.turnkey ? turnkeyCost : (baseCost + accessoriesCost);
-
-      const typeLabel = d.type === "4ape" ? "4 ape" : "2 ape";
-      const options = [typeLabel];
-      if(state.roof.accessories) options.push("Accesorii incluse");
-      if(state.roof.turnkey) options.push("Acoperiș la cheie");
-
-      return {
-        type:"Acoperiș",
-        model:model.name,
-        colorName:colorData ? colorData.name : color.name,
-        colorHex:color.hex,
-        image:roofImageFor(model, color.id),
-        area:d.totalArea.toFixed(2) + " m²",
-        description:model.shortDescription,
-        package:options.join(", "),
-        total:money(total),
-        rows:[
-          ["Dimensiuni", d.width + " × " + d.length + " m"],
-          ["Pantă", d.slopePercent + "%"],
-          ["Suprafață", d.totalArea.toFixed(2) + " m²"],
-          ["Opțiuni", options.join(", ")]
-        ],
-        clientName:$("rClientName").value.trim() || "-",
-        clientPhone:$("rClientPhone").value.trim() || "-",
-        clientCity:$("rClientCity").value.trim() || "-"
-      };
-    }
-
-    const model = getFenceModel();
-    const color = getFenceColor();
-    const length = num($("fLength").value);
-    const height = num($("fHeight").value);
-    const area = length * height;
-
-    const foundationCost = state.fence.foundation
-      ? num($("fFoundationLength").value) * num($("fFoundationWidth").value) * num($("fFoundationHeight").value) * num($("fFoundationPrice").value)
-      : 0;
-
-    const total =
-      area * model.price +
-      ((num($("fPostSpacing").value) > 0 ? ceilInt(length / num($("fPostSpacing").value)) + 1 : 0) * 180) +
-      ((num($("fPanelWidth").value) > 0 ? ceilInt(length / num($("fPanelWidth").value)) : 0) * 35) +
-      foundationCost +
-      (state.fence.oldremoval ? length * 80 : 0) +
-      (state.fence.turnkey ? area * 190 : 0);
-
-    const options = [];
-    if(state.fence.turnkey) options.push("Gard la cheie");
-    if(state.fence.foundation) options.push("Fundație");
-    if(state.fence.oldremoval) options.push("Demontare gard vechi");
-
-    return {
-      type:"Gard",
-      model:model.name,
-      colorName:color.name,
-      colorHex:color.hex,
-      image:model.img,
-      area:area.toFixed(2) + " m²",
-      description:model.desc,
-      package:options.length ? options.join(", ") : "Standard",
-      total:money(total),
-      rows:[
-        ["Dimensiuni", length + " × " + height + " m"],
-        ["Suprafață", area.toFixed(2) + " m²"],
-        ["Opțiuni", options.length ? options.join(", ") : "Standard"],
-        ["Tip", "Gard metalic"]
-      ],
-      clientName:$("fClientName").value.trim() || "-",
-      clientPhone:$("fClientPhone").value.trim() || "-",
-      clientCity:$("fClientCity").value.trim() || "-"
-    };
-  }
-
-  function fillExportSheet(type){
-    const d = getExportData(type);
-
-    $("exOfferNo").textContent = "TS-" + new Date().getFullYear() + "-" + String(Date.now()).slice(-5);
-    $("exDate").textContent = new Date().toLocaleDateString("ro-RO");
-    $("exType").textContent = d.type;
-    $("exClientName").textContent = d.clientName;
-    $("exClientPhone").textContent = d.clientPhone;
-    $("exClientCity").textContent = d.clientCity;
-    $("exTotal").textContent = d.total;
-    $("exModel").textContent = d.model;
-    $("exArea").textContent = d.area;
-    $("exPackage").textContent = d.package;
-    $("exDesc").textContent = d.description;
-    $("exImage").src = d.image || "";
-    $("exColor").textContent = d.colorName;
-    $("exDot").style.background = d.colorHex || "#444";
-
-    const tbody = $("exDetails");
-    tbody.innerHTML = "";
-    d.rows.forEach((row, i)=>{
-      const tr = document.createElement("tr");
-      tr.innerHTML =
-        '<td style="padding:12px;border-top:1px solid #eef2f7;' + (i % 2 ? 'background:#fafafa;' : '') + '">' + row[0] + '</td>' +
-        '<td style="padding:12px;border-top:1px solid #eef2f7;font-weight:700;' + (i % 2 ? 'background:#fafafa;' : '') + '">' + row[1] + '</td>';
-      tbody.appendChild(tr);
-    });
-  }
-
-  function waitImages(container){
-    const imgs = [...container.querySelectorAll("img")].filter(img=>!!img.src);
-    return Promise.all(imgs.map(img=>{
-      if(img.complete) return Promise.resolve();
-      return new Promise(resolve=>{
-        img.onload = resolve;
-        img.onerror = resolve;
-      });
-    }));
-  }
-
-  async function prepareExport(type){
-    fillExportSheet(type);
-    await waitImages($("exportSheet"));
-  }
-
-  async function exportImage(type){
-    const required = type === "roof"
-      ? ["rClientName","rClientPhone","rClientCity"]
-      : ["fClientName","fClientPhone","fClientCity"];
-
-    if(!validateFields(required)) return;
-
-    await prepareExport(type);
-
-    try{
-      const canvas = await html2canvas($("exportSheet"), {
-        scale:2,
-        useCORS:true,
-        backgroundColor:"#ffffff",
-        allowTaint:true
-      });
-      const link = document.createElement("a");
-      link.download = type === "roof" ? "oferta-acoperis.png" : "oferta-gard.png";
-      link.href = canvas.toDataURL("image/png",1.0);
-      link.click();
-    }catch(e){
-      alert("Nu s-a putut genera imaginea.");
-    }
-  }
-
-  async function exportPdf(type){
-    const required = type === "roof"
-      ? ["rClientName","rClientPhone","rClientCity"]
-      : ["fClientName","fClientPhone","fClientCity"];
-
-    if(!validateFields(required)) return;
-
-    await prepareExport(type);
-
-    try{
-      const canvas = await html2canvas($("exportSheet"), {
-        scale:2,
-        useCORS:true,
-        backgroundColor:"#ffffff",
-        allowTaint:true
-      });
-
-      const imgData = canvas.toDataURL("image/png",1.0);
-      const jsPDF = window.jspdf.jsPDF;
-      const pdf = new jsPDF("p","mm","a4");
-
-      const pageWidth = 210;
-      const pageHeight = 297;
-      const margin = 10;
-      const usableWidth = pageWidth - margin * 2;
-      const usableHeight = pageHeight - margin * 2;
-      const imgHeight = (canvas.height * usableWidth) / canvas.width;
-
-      if(imgHeight <= usableHeight){
-        pdf.addImage(imgData,"PNG",margin,margin,usableWidth,imgHeight);
-      }else{
-        let heightLeft = imgHeight;
-        let position = margin;
-        pdf.addImage(imgData,"PNG",margin,position,usableWidth,imgHeight);
-        heightLeft -= usableHeight;
-
-        while(heightLeft > 0){
-          position = heightLeft - imgHeight + margin;
-          pdf.addPage();
-          pdf.addImage(imgData,"PNG",margin,position,usableWidth,imgHeight);
-          heightLeft -= usableHeight;
-        }
-      }
-
-      pdf.save(type === "roof" ? "oferta-acoperis.pdf" : "oferta-gard.pdf");
-    }catch(e){
-      alert("Nu s-a putut genera PDF-ul.");
-    }
-  }
-
-  async function printSheet(type){
-    const required = type === "roof"
-      ? ["rClientName","rClientPhone","rClientCity"]
-      : ["fClientName","fClientPhone","fClientCity"];
-
-    if(!validateFields(required)) return;
-
-    await prepareExport(type);
-
-    const html = $("exportSheet").outerHTML;
-    const w = window.open("", "_blank");
-    if(!w){
-      alert("Browserul a blocat fereastra de print.");
-      return;
-    }
-    w.document.write('<html><head><title>Ofertă TotulShop</title><style>@page{size:A4;margin:10mm}body{margin:0;background:#fff}</style></head><body>'+html+'</body></html>');
-    w.document.close();
-    setTimeout(()=>{ w.focus(); w.print(); }, 700);
-  }
-
-  function openWhatsApp(type){
-    const required = type === "roof"
-      ? ["rClientName","rClientPhone","rClientCity"]
-      : ["fClientName","fClientPhone","fClientCity"];
-
-    if(!validateFields(required)) return;
-
-    const msg = type === "roof" ? lastRoofMessage : lastFenceMessage;
-    window.open("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(msg), "_blank");
-  }
-
-  function openMessenger(type){
-    const required = type === "roof"
-      ? ["rClientName","rClientPhone","rClientCity"]
-      : ["fClientName","fClientPhone","fClientCity"];
-
-    if(!validateFields(required)) return;
-
-    const target = type === "roof" ? $("copyMessageRoof") : $("copyMessageFence");
-    const msg = type === "roof" ? lastRoofMessage : lastFenceMessage;
-
-    function go(){
-      window.open(MESSENGER_LINK, "_blank");
-    }
-
-    if(navigator.clipboard && window.isSecureContext){
-      navigator.clipboard.writeText(msg).then(()=>{
-        alert("Textul a fost copiat. În Messenger doar lipești mesajul.");
-        go();
-      }).catch(()=>{
-        target.removeAttribute("readonly");
-        target.focus();
-        target.select();
-        alert("Copiază manual textul din câmpul de mai jos pentru Messenger.");
-        go();
-      });
-    }else{
-      try{
-        target.removeAttribute("readonly");
-        target.focus();
-        target.select();
-        document.execCommand("copy");
-        target.setAttribute("readonly","readonly");
-        alert("Textul a fost copiat. În Messenger doar lipești mesajul.");
-      }catch(e){
-        alert("Copiază manual textul din câmpul de mai jos pentru Messenger.");
-      }
-      go();
-    }
-  }
-
-  [...document.querySelectorAll(".roof-field")].forEach(el=>{
-    el.addEventListener("input", function(){ this.classList.remove("ts-error"); recalcRoof(true); });
-    el.addEventListener("change", function(){ this.classList.remove("ts-error"); recalcRoof(true); });
-  });
-
-  [...document.querySelectorAll(".fence-field")].forEach(el=>{
-    el.addEventListener("input", function(){ this.classList.remove("ts-error"); recalcFence(true); });
-    el.addEventListener("change", function(){ this.classList.remove("ts-error"); recalcFence(true); });
-  });
-
-  $("btnWaRoof").onclick = ()=>openWhatsApp("roof");
-  $("btnMsRoof").onclick = ()=>openMessenger("roof");
-  $("btnImgRoof").onclick = ()=>exportImage("roof");
-  $("btnPdfRoof").onclick = ()=>exportPdf("roof");
-  $("btnPrintRoof").onclick = ()=>printSheet("roof");
-
-  $("btnWaFence").onclick = ()=>openWhatsApp("fence");
-  $("btnMsFence").onclick = ()=>openMessenger("fence");
-  $("btnImgFence").onclick = ()=>exportImage("fence");
-  $("btnPdfFence").onclick = ()=>exportPdf("fence");
-  $("btnPrintFence").onclick = ()=>printSheet("fence");
-
-  renderRoofModelCards();
-  renderRoofColors();
-  bindRoofPills();
-  syncRoofTypePills();
-  syncRoofOptionPills();
-
-  renderFenceModelCards();
-  renderFenceColors();
-  bindFencePills();
-  syncFenceOptionPills();
-
-  recalcRoof(false);
-  recalcFence(false);
+const WEBAPP_URL="https://script.google.com/macros/s/AKfycbzhfc6elXTBVsYZXwytq6rBcIJLpsniEnpjFmczglmrPbno56hcmG-hfLbn-3do0UNySQ/exec";
+const ROOF_TILE_PRICE=135,ROOF_ACCESSORIES_FACTOR=.35,ROOF_TURNKEY_PRICE=1350;
+const roofColors=[{id:"3005",name:"Красное вино 3005",hex:"#7b1f29"},{id:"3011",name:"Красный 3011",hex:"#8a3b2f"},{id:"3009",name:"Оксид красный 3009",hex:"#6b2c2f"},{id:"5005",name:"Синий 5005",hex:"#1f4e79"},{id:"6005",name:"Зеленый 6005",hex:"#114232"},{id:"7016",name:"Антрацит 7016",hex:"#383E42"},{id:"7024",name:"Графитовый серый 7024",hex:"#4b4f54"},{id:"8015",name:"Коричневый 8015",hex:"#5a382d"},{id:"8017",name:"Шоколадно-коричневый 8017",hex:"#45322e"},{id:"8019",name:"Темно-коричневый 8019",hex:"#3b2f2f"},{id:"9005",name:"Черный 9005",hex:"#111111"}];
+const roofModels=[
+{id:"dakia",name:"Металлочерепица Dakia",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_7024_0.png",shortDescription:"Современная форма с 3D-эффектом и элегантным внешним видом. Симметричный профиль и удобный монтаж.",colors:{"3005":{name:"Красное вино 3005",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_3005.png"},"3011":{name:"Красный 3011",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_3011.png"},"3009":{name:"Оксид красный 3009",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_3009.png"},"5005":{name:"Синий 5005",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_5005.png"},"6005":{name:"Зеленый 6005",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_6005.png"},"7016":{name:"Антрацит 7016",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_7016.png"},"7024":{name:"Графитовый серый 7024",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_7024_0.png"},"8015":{name:"Коричневый 8015",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_8015.png"},"8017":{name:"Шоколадно-коричневый 8017",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_8017.png"},"8019":{name:"Темно-коричневый 8019",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_8019.png"},"9005":{name:"Черный 9005",img:"https://krovli.lider.md/sites/default/files/2025-10/Dakia_9005.png"}}},
+{id:"melano",name:"Металлочерепица Melano",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_7024.png",shortDescription:"Изысканный дизайн с 3D-срезом и аккуратными стыками для элегантной крыши.",colors:{"3005":{name:"Красное вино 3005",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_3005.png"},"3011":{name:"Красный 3011",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_3011.png"},"3009":{name:"Оксид красный 3009",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_3009.png"},"5005":{name:"Синий 5005",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_5005.png"},"6005":{name:"Зеленый 6005",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_6005.png"},"7016":{name:"Антрацит 7016",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_7016.png"},"7024":{name:"Графитовый серый 7024",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_7024.png"},"8015":{name:"Коричневый 8015",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_8015.png"},"8017":{name:"Шоколадно-коричневый 8017",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_8017.png"},"8019":{name:"Темно-коричневый 8019",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_8019.png"},"9005":{name:"Черный 9005",img:"https://krovli.lider.md/sites/default/files/2025-09/Melano_9005.png"}}},
+{id:"lider",name:"Металлочерепица Lider",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_7024_0.png",shortDescription:"Классический профиль для надежной крыши, сбалансированный вид и простой монтаж.",colors:{"3005":{name:"Красное вино 3005",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_3005.png"},"3011":{name:"Красный 3011",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_3011.png"},"3009":{name:"Оксид красный 3009",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_3009.png"},"5005":{name:"Синий 5005",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_5005.png"},"6005":{name:"Зеленый 6005",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_6005.png"},"7016":{name:"Антрацит 7016",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_7016.png"},"7024":{name:"Графитовый серый 7024",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_7024_0.png"},"8015":{name:"Коричневый 8015",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_8015.png"},"8017":{name:"Шоколадно-коричневый 8017",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_8017.png"},"8019":{name:"Темно-коричневый 8019",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_8019.png"},"9005":{name:"Черный 9005",img:"https://krovli.lider.md/sites/default/files/2025-10/Lider_9005.png"}}},
+{id:"florentia",name:"Металлочерепица Florentia",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_7024_0.png",shortDescription:"Современный профиль, вдохновленный керамической черепицей, для выразительной и элегантной крыши.",colors:{"3005":{name:"Красное вино 3005",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_3005.png"},"3011":{name:"Красный 3011",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_3011.png"},"3009":{name:"Оксид красный 3009",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_3009.png"},"5005":{name:"Синий 5005",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_5005.png"},"6005":{name:"Зеленый 6005",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_6005.png"},"7016":{name:"Антрацит 7016",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_7016.png"},"7024":{name:"Графитовый серый 7024",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_7024_0.png"},"8015":{name:"Коричневый 8015",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_8015.png"},"8017":{name:"Шоколадно-коричневый 8017",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_8017.png"},"8019":{name:"Темно-коричневый 8019",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_8019.png"},"9005":{name:"Черный 9005",img:"https://krovli.lider.md/sites/default/files/2025-10/Florentia_9005.png"}}},
+{id:"karelia",name:"Металлочерепица Karelia",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_7024_0.png",shortDescription:"Профиль 3D с премиальным видом и выразительными линиями для современных крыш.",colors:{"3005":{name:"Красное вино 3005",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_3005.png"},"6005":{name:"Зеленый 6005",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_6005.png"},"7024":{name:"Графитовый серый 7024",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_7024_0.png"},"8015":{name:"Коричневый 8015",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_8015.png"},"8019":{name:"Темно-коричневый 8019",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_8019.png"},"9005":{name:"Черный 9005",img:"https://krovli.lider.md/sites/default/files/2025-10/Karelia_9005.png"}}}
+];
+const state={currentStep:1,model:"dakia",color:"7024",shape:"2ape",length:12,width:10,slope:35,eave:60,package:"tile",city:"",customCity:"",name:"",phone:""};
+function $(id){return document.getElementById(id)}function money(n){return Math.round(n).toLocaleString("ru-RU")+" лей"}function num(v){const n=parseFloat(String(v).replace(",","."));return isNaN(n)?0:n}function getModel(){return roofModels.find(m=>m.id===state.model)||roofModels[0]}function getColor(){return roofColors.find(c=>c.id===state.color)||roofColors[0]}function colorNameForModel(model,colorId){if(model.colors&&model.colors[colorId])return model.colors[colorId].name;const fallback=roofColors.find(c=>c.id===colorId);return fallback?fallback.name:colorId}function roofImageFor(model,colorId){if(model.colors&&model.colors[colorId]&&model.colors[colorId].img)return model.colors[colorId].img;return model.img}function getFinalCity(){return state.city==="Другой населенный пункт"?state.customCity.trim():state.city}function packageLabel(key){if(key==="tile")return"Только металлочерепица";if(key==="accessories")return"Металлочерепица + аксессуары";if(key==="turnkey")return"Крыша под ключ";return"-"}function shapeLabel(key){return key==="4ape"?"4 ската":"2 ската"}
+function roofMath(){const length=num(state.length),width=num(state.width),slopePercent=num(state.slope),eaveCm=num(state.eave),eaveM=eaveCm/100,adjLength=length+eaveM*2,adjWidth=width+eaveM*2,slopeFactor=Math.sqrt(1+Math.pow(slopePercent/100,2)),longSide=Math.max(adjLength,adjWidth),shortSide=Math.min(adjLength,adjWidth),halfSpan=shortSide/2,totalArea2=longSide*halfSpan*slopeFactor*2,ridgeLength=Math.max(longSide-shortSide,0),trapezoidOne=((ridgeLength+longSide)/2)*halfSpan*slopeFactor,trapezoidsTotal=trapezoidOne*2,triangleOne=(shortSide*halfSpan/2)*slopeFactor,trianglesTotal=triangleOne*2,totalArea4=(trapezoidsTotal+trianglesTotal)*1.08;return{length,width,slopePercent,eaveCm,totalArea:state.shape==="4ape"?totalArea4:totalArea2}}
+function calcPrice(){const d=roofMath(),baseCost=d.totalArea*ROOF_TILE_PRICE;let total=baseCost;if(state.package==="accessories")total=baseCost+baseCost*ROOF_ACCESSORIES_FACTOR;if(state.package==="turnkey")total=d.totalArea*ROOF_TURNKEY_PRICE;return{area:d.totalArea,baseCost,total}}function progressWidthForStep(step){return Math.min(step,7)/7*100}function setContinueState(buttonId,enabled){const btn=$(buttonId);if(!btn)return;btn.classList.remove("ts-btn-disabled","ts-btn-enabled");btn.classList.add(enabled?"ts-btn-enabled":"ts-btn-disabled")}function refreshContinueButtons(){setContinueState("next1",!!state.model);setContinueState("next2",!!state.color);setContinueState("next3",!!state.shape);const dimsOk=num($("houseLength").value)>0&&num($("houseWidth").value)>0&&num($("houseSlope").value)>0&&num($("houseEave").value)>=0;setContinueState("next4",dimsOk);setContinueState("next5",!!state.package);const cityOk=!!state.city&&(state.city!=="Другой населенный пункт"||!!$("cityOther").value.trim());setContinueState("next6",cityOk)}
+function goToStep(step){const nextEl=document.querySelector('.ts-step[data-step="'+step+'"]');if(!nextEl)return;state.currentStep=step;$("progressBar").style.width=progressWidthForStep(step)+"%";renderAll();document.querySelectorAll(".ts-step").forEach(el=>el.classList.remove("ts-active","ts-leaving-left","ts-leaving-right"));nextEl.classList.add("ts-active");window.scrollTo({top:0,behavior:"smooth"})}
+function validateStep(step){if(step===4){let ok=true;["houseLength","houseWidth","houseSlope","houseEave"].forEach(id=>{const el=$(id);el.classList.remove("ts-error");if(!el.value||(num(el.value)<=0&&id!=="houseEave")){el.classList.add("ts-error");ok=false}});if(num($("houseEave").value)<0){$("houseEave").classList.add("ts-error");ok=false}return ok}if(step===6){if(!state.city)return false;if(state.city==="Другой населенный пункт"&&!state.customCity.trim()){$("cityOther").classList.add("ts-error");return false}return true}if(step===7){let ok=true;["clientName","clientPhone"].forEach(id=>{const el=$(id);el.classList.remove("ts-error");if(!el.value.trim()){el.classList.add("ts-error");ok=false}});if(!getFinalCity())ok=false;return ok}return true}
+function renderModelGrid(){const grid=$("modelGrid");grid.innerHTML="";roofModels.forEach(model=>{const count=Object.keys(model.colors||{}).length,card=document.createElement("div");card.className="ts-model-card"+(state.model===model.id?" ts-selected":"");card.innerHTML='<div class="ts-check">'+(state.model===model.id?"✓":"")+'</div><div class="ts-model-media"><img src="'+model.img+'" alt="'+model.name+'" loading="lazy"></div><div class="ts-model-body"><div class="ts-model-sub">'+count+' цветов доступно</div><div class="ts-model-title">'+model.name+'</div><div class="ts-model-desc">'+model.shortDescription+'</div></div>';card.addEventListener("click",()=>{state.model=model.id;const allowed=Object.keys(model.colors);if(!allowed.includes(state.color))state.color=allowed[0];renderAll()});grid.appendChild(card)})}
+function renderColorGrid(){const grid=$("colorGrid"),model=getModel();grid.innerHTML="";roofColors.forEach(color=>{if(!model.colors[color.id])return;const card=document.createElement("div");card.className="ts-color-card"+(state.color===color.id?" ts-selected":"");card.innerHTML='<div class="ts-color-swatch" style="background:'+color.hex+';"></div><strong>'+colorNameForModel(model,color.id)+'</strong><span>Код '+color.id+"</span>";card.addEventListener("click",()=>{state.color=color.id;renderAll()});grid.appendChild(card)})}
+function renderPreview(){const model=getModel(),color=getColor();$("previewImage").src=roofImageFor(model,color.id);$("previewModelName").textContent=model.name;$("previewDot").style.background=color.hex;$("previewColorName").textContent=colorNameForModel(model,color.id)}function renderShapes(){document.querySelectorAll("[data-shape]").forEach(el=>el.classList.toggle("ts-selected",el.getAttribute("data-shape")===state.shape))}function renderPackages(){document.querySelectorAll("[data-package]").forEach(el=>el.classList.toggle("ts-selected",el.getAttribute("data-package")===state.package))}function renderCities(){document.querySelectorAll("[data-city]").forEach(el=>el.classList.toggle("ts-selected",el.getAttribute("data-city")===state.city));$("cityOtherWrap").classList.toggle("ts-show",state.city==="Другой населенный пункт")}
+function renderSummary(){const model=getModel(),color=getColor(),price=calcPrice();$("summaryLine1").textContent=model.name+" × "+price.area.toFixed(2)+" м²";$("summaryPartial").textContent=money(price.total);$("summaryTotal").textContent=money(price.total);$("sumModel").textContent=model.name;$("sumColor").textContent=colorNameForModel(model,color.id);$("sumShape").textContent=shapeLabel(state.shape);$("sumArea").textContent=price.area.toFixed(2)+" м²";$("sumCity").textContent=getFinalCity()||"-";$("sumPackage").textContent=packageLabel(state.package);$("thankTitle").textContent=state.name?"Спасибо, "+state.name+"!":"Спасибо!";$("thankModel").textContent=model.name;$("thankArea").textContent=price.area.toFixed(2)+" м²";$("thankTotal").textContent=money(price.total)}
+function renderAll(){renderModelGrid();renderColorGrid();renderPreview();renderShapes();renderPackages();renderCities();renderSummary();refreshContinueButtons()}function fillExportCard(){const model=getModel(),color=getColor(),price=calcPrice();$("expImage").src=roofImageFor(model,color.id);$("expTotal").textContent=money(price.total);$("expModel").textContent=model.name;$("expColorName").textContent=colorNameForModel(model,color.id);$("expShape").textContent=shapeLabel(state.shape);$("expPackage").textContent=packageLabel(state.package);$("expArea").textContent=price.area.toFixed(2)+" м²"}async function downloadOfferImage(){try{fillExportCard();const canvas=await html2canvas($("offerExportCard"),{scale:2,useCORS:true,backgroundColor:"#ffffff",allowTaint:true});const link=document.createElement("a");link.download="oferta-acoperis-totulshop-ru.png";link.href=canvas.toDataURL("image/png",1);link.click()}catch(e){alert("Не удалось создать изображение предложения.")}}
+function sendLead(){state.name=$("clientName").value.trim();state.phone=$("clientPhone").value.trim();state.customCity=$("cityOther").value.trim();if(!validateStep(7)){alert("Заполните имя и телефон.");return}const model=getModel(),color=getColor(),price=calcPrice(),product=model.name+" | "+colorNameForModel(model,color.id)+" | "+shapeLabel(state.shape)+" | "+packageLabel(state.package)+" | "+price.area.toFixed(2)+" м²";const url=WEBAPP_URL+"?name="+encodeURIComponent(state.name)+"&phone="+encodeURIComponent(state.phone)+"&city="+encodeURIComponent(getFinalCity()||"-")+"&product="+encodeURIComponent(product)+"&price="+encodeURIComponent(money(price.total))+"&t="+Date.now();const img=new Image();img.src=url;goToStep(8)}
+document.querySelectorAll(".ts-back").forEach(btn=>btn.addEventListener("click",()=>goToStep(Number(btn.getAttribute("data-back")))));$("next1").addEventListener("click",()=>goToStep(2));$("next2").addEventListener("click",()=>goToStep(3));$("next3").addEventListener("click",()=>goToStep(4));$("next4").addEventListener("click",()=>{state.length=num($("houseLength").value);state.width=num($("houseWidth").value);state.slope=num($("houseSlope").value);state.eave=num($("houseEave").value);if(!validateStep(4))return;goToStep(5)});$("next5").addEventListener("click",()=>goToStep(6));$("next6").addEventListener("click",()=>{$("cityOther").classList.remove("ts-error");state.customCity=$("cityOther").value.trim();if(!validateStep(6)){alert("Выберите населенный пункт.");return}goToStep(7)});document.querySelectorAll("[data-shape]").forEach(el=>el.addEventListener("click",()=>{state.shape=el.getAttribute("data-shape");renderShapes();refreshContinueButtons()}));document.querySelectorAll("[data-package]").forEach(el=>el.addEventListener("click",()=>{state.package=el.getAttribute("data-package");renderPackages();renderSummary();refreshContinueButtons()}));document.querySelectorAll("[data-city]").forEach(el=>el.addEventListener("click",()=>{state.city=el.getAttribute("data-city");if(state.city!=="Другой населенный пункт"){state.customCity="";$("cityOther").value=""}renderCities();renderSummary();refreshContinueButtons()}));["houseLength","houseWidth","houseSlope","houseEave"].forEach(id=>$(id).addEventListener("input",function(){this.classList.remove("ts-error");state.length=num($("houseLength").value);state.width=num($("houseWidth").value);state.slope=num($("houseSlope").value);state.eave=num($("houseEave").value);renderSummary();refreshContinueButtons()}));$("cityOther").addEventListener("input",function(){this.classList.remove("ts-error");state.customCity=this.value.trim();renderSummary();refreshContinueButtons()});$("clientName").addEventListener("input",function(){this.classList.remove("ts-error");state.name=this.value.trim();renderSummary()});$("clientPhone").addEventListener("input",function(){this.classList.remove("ts-error");state.phone=this.value.trim()});$("sendWhatsapp").addEventListener("click",sendLead);$("downloadOfferImage").addEventListener("click",downloadOfferImage);$("restartCalc").addEventListener("click",()=>{state.currentStep=1;state.model="dakia";state.color="7024";state.shape="2ape";state.length=12;state.width=10;state.slope=35;state.eave=60;state.package="tile";state.city="";state.customCity="";state.name="";state.phone="";$("houseLength").value=12;$("houseWidth").value=10;$("houseSlope").value=35;$("houseEave").value=60;$("cityOther").value="";$("clientName").value="";$("clientPhone").value="";document.querySelectorAll(".ts-input").forEach(el=>el.classList.remove("ts-error"));goToStep(1)});renderAll();goToStep(1);refreshContinueButtons();
 })();
 </script>
-
-</body>
-</html>
