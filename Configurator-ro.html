@@ -1,12 +1,7 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Калькулятор крыши | TotulShop.md</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title></title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
-:root{--card:#fff;--line:#e5e7eb;--text:#111827;--muted:#6b7280;--accent:#e30613;--accent-strong:#c40010;--green:#25D366;--shadow:0 10px 28px rgba(0,0,0,.06);--shadow-hover:0 14px 34px rgba(0,0,0,.10)}
+<style type="text/css">:root{--card:#fff;--line:#e5e7eb;--text:#111827;--muted:#6b7280;--accent:#e30613;--accent-strong:#c40010;--green:#25D366;--shadow:0 10px 28px rgba(0,0,0,.06);--shadow-hover:0 14px 34px rgba(0,0,0,.10)}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:linear-gradient(180deg,#f7f8fa 0%,#f1f3f6 100%);color:var(--text)}img{max-width:100%;display:block}button,input,textarea{font:inherit}a{text-decoration:none}
 .ts-page{max-width:780px;margin:0 auto;padding:10px 14px 120px}.ts-card{background:var(--card);border:3px solid var(--accent);border-radius:28px;box-shadow:var(--shadow);overflow:hidden;margin-top:18px;position:relative}.ts-progress{height:8px;background:#eceff3;position:relative}.ts-progress>span{position:absolute;left:0;top:0;bottom:0;width:14.285%;background:linear-gradient(90deg,var(--accent) 0%,#ff2a36 100%);transition:width .28s ease}
 .ts-step{display:none;padding:24px 20px 22px;opacity:0;transform:translateX(24px) scale(.985);transition:opacity .35s ease,transform .35s ease}.ts-step.ts-active{display:block;opacity:1;transform:translateX(0) scale(1);animation:tsStepIn .35s ease}@keyframes tsStepIn{from{opacity:0;transform:translateX(24px) scale(.985)}to{opacity:1;transform:translateX(0) scale(1)}}
@@ -26,33 +21,282 @@
 @media(min-width:900px){.ts-page{max-width:1180px!important;padding:30px 24px 140px!important}.ts-card{width:100%!important;max-width:100%!important}.ts-step{padding:34px 38px 34px!important}.ts-model-grid{grid-template-columns:repeat(2,1fr)!important}.ts-color-grid{grid-template-columns:repeat(4,1fr)!important}.ts-city-grid{grid-template-columns:repeat(4,1fr)!important}.ts-option-grid{grid-template-columns:repeat(3,1fr)!important}.ts-floating-inner{max-width:1180px!important}}
 @media(min-width:1200px){.ts-page{max-width:1280px!important}.ts-model-grid{grid-template-columns:repeat(3,1fr)!important}}
 </style>
-</head>
-<body>
+<div class="ts-page">
+<div class="ts-card">
+<div class="ts-progress">&nbsp;</div>
 
-<div class="ts-page"><div class="ts-card"><div class="ts-progress"><span id="progressBar"></span></div>
+<section class="ts-step ts-active" data-step="1">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 1 из 7</div>
 
-<section class="ts-step ts-active" data-step="1"><div class="ts-step-head"><div><div class="ts-step-no">Шаг 1 из 7</div><h2>Выберите модель металлочерепицы</h2><p>Выберите нужную модель. После этого можно выбрать цвет.</p></div></div><div class="ts-model-grid" id="modelGrid"></div><button class="ts-btn ts-btn-main" type="button" id="next1">Далее →</button><div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div></section>
+<h2>Выберите модель металлочерепицы</h2>
 
-<section class="ts-step" data-step="2"><div class="ts-step-head"><div><div class="ts-step-no">Шаг 2 из 7</div><h2>Выберите цвет</h2><p>Мы оставили доступные цвета для выбранной модели.</p></div><button class="ts-back" type="button" data-back="1">← Назад</button></div><div class="ts-preview"><div class="ts-preview-figure"><img id="previewImage" src="" alt="Выбранная модель" loading="lazy"></div><div class="ts-preview-meta"><div class="ts-chip"><strong id="previewModelName">-</strong></div><div class="ts-chip"><span class="ts-dot" id="previewDot"></span><span id="previewColorName">-</span></div></div></div><div class="ts-color-grid" id="colorGrid"></div><button class="ts-btn ts-btn-main" type="button" id="next2">Далее →</button><div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div></section>
+<p>Выберите нужную модель. После этого можно выбрать цвет.</p>
+</div>
+</div>
 
-<section class="ts-step" data-step="3"><div class="ts-step-head"><div><div class="ts-step-no">Шаг 3 из 7</div><h2>Форма крыши</h2><p>Выберите тип крыши для более точного расчета площади.</p></div><button class="ts-back" type="button" data-back="2">← Назад</button></div><div class="ts-shape-grid"><div class="ts-shape-card ts-selected" data-shape="2ape"><div class="ts-shape-icon"><svg viewBox="0 0 160 90" fill="none"><path d="M15 70L80 20L145 70" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 70H120" stroke="currentColor" stroke-width="8" stroke-linecap="round"/></svg></div><strong>2 ската</strong><span>Расчет для крыши в два ската</span></div><div class="ts-shape-card" data-shape="4ape"><div class="ts-shape-icon"><svg viewBox="0 0 160 90" fill="none"><path d="M20 62L60 35H100L140 62" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 35L80 18L100 35" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/><path d="M45 62H115" stroke="currentColor" stroke-width="8" stroke-linecap="round"/></svg></div><strong>4 ската</strong><span>Расчет для крыши в четыре ската</span></div></div><button class="ts-btn ts-btn-main" type="button" id="next3">Далее →</button><div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div></section>
+<div class="ts-model-grid" id="modelGrid">&nbsp;</div>
+<button class="ts-btn ts-btn-main" id="next1" type="button">Далее &rarr;</button>
 
-<section class="ts-step" data-step="4"><div class="ts-step-head"><div><div class="ts-step-no">Шаг 4 из 7</div><h2>Размеры дома</h2><p>Введите длину и ширину дома, уклон и свес.</p></div><button class="ts-back" type="button" data-back="3">← Назад</button></div><div class="ts-grid-2"><div class="ts-field"><label for="houseLength">Длина (м)</label><input class="ts-input" id="houseLength" type="number" min="1" step="0.1" value="12"></div><div class="ts-field"><label for="houseWidth">Ширина (м)</label><input class="ts-input" id="houseWidth" type="number" min="1" step="0.1" value="10"></div><div class="ts-field"><label for="houseSlope">Уклон (%)</label><input class="ts-input" id="houseSlope" type="number" min="1" step="1" value="35"></div><div class="ts-field"><label for="houseEave">Свес (см)</label><input class="ts-input" id="houseEave" type="number" min="0" step="1" value="60"></div></div><div class="ts-help-box">Формула уклона сохранена. Для крыши в 4 ската отдельно учитываются трапеции, треугольники и корректировка по ребрам.</div><button class="ts-btn ts-btn-main" type="button" id="next4">Далее →</button><div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div></section>
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
 
-<section class="ts-step" data-step="5"><div class="ts-step-head"><div><div class="ts-step-no">Шаг 5 из 7</div><h2>Выберите пакет</h2><p>Можно рассчитать только металлочерепицу, металлочерепицу с аксессуарами или крышу под ключ.</p></div><button class="ts-back" type="button" data-back="4">← Назад</button></div><div class="ts-option-grid"><div class="ts-option-card ts-selected" data-package="tile"><strong>Только металлочерепица</strong><p>Ориентировочный расчет только металлочерепицы.</p></div><div class="ts-option-card" data-package="accessories"><strong>Металлочерепица + аксессуары</strong><p>К расчету автоматически добавляются аксессуары.</p></div><div class="ts-option-card" data-package="turnkey"><strong>Крыша под ключ</strong><p>Применяется специальная цена за м² для полного пакета.</p></div></div><button class="ts-btn ts-btn-main" type="button" id="next5">Далее →</button><div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div></section>
+<section class="ts-step" data-step="2">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 2 из 7</div>
 
-<section class="ts-step" data-step="6"><div class="ts-step-head"><div><div class="ts-step-no">Шаг 6 из 7</div><h2>Населенный пункт</h2><p>Где будет выполняться монтаж крыши?</p></div><button class="ts-back" type="button" data-back="5">← Назад</button></div><div class="ts-city-grid" id="cityGrid"><button class="ts-city-btn" type="button" data-city="Кишинёв">Кишинёв</button><button class="ts-city-btn" type="button" data-city="Бельцы">Бельцы</button><button class="ts-city-btn" type="button" data-city="Яловены">Яловены</button><button class="ts-city-btn" type="button" data-city="Оргеев">Оргеев</button><button class="ts-city-btn" type="button" data-city="Кагул">Кагул</button><button class="ts-city-btn" type="button" data-city="Унгены">Унгены</button><button class="ts-city-btn" type="button" data-city="Сороки">Сороки</button><button class="ts-city-btn" type="button" data-city="Единцы">Единцы</button><button class="ts-city-btn" type="button" data-city="Комрат">Комрат</button><button class="ts-city-btn" type="button" data-city="Страшены">Страшены</button><button class="ts-city-btn" type="button" data-city="Хынчешты">Хынчешты</button><button class="ts-city-btn" type="button" data-city="Дрокия">Дрокия</button><button class="ts-city-btn" type="button" data-city="Флорешты">Флорешты</button><button class="ts-city-btn" type="button" data-city="Каушаны">Каушаны</button><button class="ts-city-btn" type="button" data-city="Криулены">Криулены</button><button class="ts-city-btn" type="button" data-city="Ниспорены">Ниспорены</button><button class="ts-city-btn" type="button" data-city="Штефан Водэ">Штефан Водэ</button><button class="ts-city-btn" type="button" data-city="Другой населенный пункт">Другой населенный пункт</button></div><div class="ts-city-other" id="cityOtherWrap"><div class="ts-field"><label for="cityOther">Укажите населенный пункт</label><input class="ts-input" id="cityOther" type="text" placeholder="Например: Чимишлия"></div></div><button class="ts-btn ts-btn-main" type="button" id="next6">Далее →</button><div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div></section>
+<h2>Выберите цвет</h2>
 
-<section class="ts-step" data-step="7"><div class="ts-step-head"><div><div class="ts-step-no">Шаг 7 из 7</div><h2>Итог и ваши данные</h2><p>Проверьте расчет и отправьте заявку.</p></div><button class="ts-back" type="button" data-back="6">← Назад</button></div><div class="ts-estimate"><div class="ts-estimate-label">Расчет стоимости</div><div class="ts-estimate-row"><div id="summaryLine1">Металлочерепица × 0 м²</div><strong id="summaryPartial">0 лей</strong></div><div class="ts-estimate-row"><strong>Итого ориентировочно</strong><div class="ts-estimate-total" id="summaryTotal">0 лей</div></div><div class="ts-estimate-note" id="summaryNote">Цена ориентировочная. Точное предложение может включать аксессуары, доставку и технические детали.</div></div><div class="ts-thank-summary"><div class="ts-thank-row"><span>Модель:</span><strong id="sumModel">-</strong></div><div class="ts-thank-row"><span>Цвет:</span><strong id="sumColor">-</strong></div><div class="ts-thank-row"><span>Форма:</span><strong id="sumShape">-</strong></div><div class="ts-thank-row"><span>Площадь:</span><strong id="sumArea">-</strong></div><div class="ts-thank-row"><span>Населенный пункт:</span><strong id="sumCity">-</strong></div><div class="ts-thank-row"><span>Пакет:</span><strong id="sumPackage">-</strong></div></div><div class="ts-contact-box"><div class="ts-field"><label for="clientName">Ваше имя</label><input class="ts-input" id="clientName" type="text" placeholder="Ваше имя"></div><div class="ts-field"><label for="clientPhone">Телефон</label><input class="ts-input" id="clientPhone" type="tel" placeholder="+373 XX XXX XXX"></div></div><div class="ts-submit-row"><button class="ts-btn ts-btn-main ts-strong" type="button" id="sendWhatsapp">Запросить предложение</button></div><div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div></section>
+<p>Мы оставили доступные цвета для выбранной модели.</p>
+</div>
+<button class="ts-back" data-back="1" type="button">&larr; Назад</button></div>
 
-<section class="ts-step" data-step="8"><div class="ts-thank"><div class="ts-thank-icon">✓</div><h3 id="thankTitle">Спасибо!</h3><p>Заявка отправлена. Мы свяжемся с вами в ближайшее время и подготовим детальное предложение по крыше.</p><div class="ts-thank-summary"><div class="ts-thank-row"><span>Материал:</span><strong>Металлочерепица</strong></div><div class="ts-thank-row"><span>Модель:</span><strong id="thankModel">-</strong></div><div class="ts-thank-row"><span>Площадь:</span><strong id="thankArea">-</strong></div><div class="ts-thank-row"><span>Ориентировочная сумма:</span><strong id="thankTotal" style="color:var(--accent-strong);">-</strong></div></div><div class="ts-submit-row"><button class="ts-btn ts-btn-main ts-strong" type="button" id="downloadOfferImage">Скачать предложение как изображение</button><button class="ts-btn ts-btn-dark" type="button" id="restartCalc">Рассчитать заново</button></div></div></section>
+<div class="ts-preview">
+<div class="ts-preview-figure"><img alt="Выбранная модель" id="previewImage" loading="lazy" src="" /></div>
 
-</div><textarea id="copyBuffer" class="ts-hidden-copy" readonly></textarea></div>
+<div class="ts-preview-meta">
+<div class="ts-chip"><strong id="previewModelName">-</strong></div>
 
-<div class="ts-floating-bar"><div class="ts-floating-inner"><a class="ts-mini-btn" href="tel:+37379980247" style="background:linear-gradient(135deg,#e30613 0%,#c40010 100%);"><svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.8 3.5 3.1 4.8 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3 .6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.7 22 2 13.3 2 2c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1 .2 2 .6 3 .1.4.1.8-.2 1.2L6.6 10.8Z" stroke="currentColor" stroke-width="1.7" fill="none"/></svg>Позвонить</a></div></div>
+<div class="ts-chip"><span id="previewColorName">-</span></div>
+</div>
+</div>
 
-<div id="offerExportWrap" style="position:fixed;left:-99999px;top:0;width:430px;background:#fff;z-index:-1;"><div id="offerExportCard" style="width:430px;background:#fff;color:#111;padding:22px;font-family:Arial,Helvetica,sans-serif;box-sizing:border-box;border-radius:28px;"><div style="font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#9ca3af;font-weight:800;margin-bottom:8px;">Ориентировочное предложение</div><div style="font-size:26px;font-weight:900;line-height:1.05;color:#111;margin-bottom:12px;">Металлическая крыша</div><div style="background:#f3f4f6;border-radius:22px;padding:14px;margin-bottom:16px;"><img id="expImage" src="" alt="Выбранная крыша" style="width:100%;height:190px;object-fit:contain;display:block;"></div><div style="background:#fff5f5;border:1px solid #ffd5d9;border-radius:22px;padding:16px;margin-bottom:16px;"><div style="font-size:11px;text-transform:uppercase;color:#b91c1c;font-weight:800;letter-spacing:1px;margin-bottom:8px;">Итого ориентировочно</div><div id="expTotal" style="font-size:38px;line-height:1;font-weight:900;color:#c40010;">0 лей</div></div><div style="border:1px solid #e5e7eb;border-radius:22px;overflow:hidden;margin-bottom:16px;"><table style="width:100%;border-collapse:collapse;font-size:14px;"><tbody><tr><td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Модель</td><td id="expModel" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td></tr><tr><td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Цвет</td><td id="expColorName" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td></tr><tr><td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Форма</td><td id="expShape" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td></tr><tr><td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Пакет</td><td id="expPackage" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td></tr><tr><td style="padding:12px;color:#6b7280;">Площадь</td><td id="expArea" style="padding:12px;font-weight:800;text-align:right;">-</td></tr></tbody></table></div><div style="font-size:12px;color:#9ca3af;">TotulShop.md • +373 79 980 247</div></div></div>
+<div class="ts-color-grid" id="colorGrid">&nbsp;</div>
+<button class="ts-btn ts-btn-main" id="next2" type="button">Далее &rarr;</button>
 
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="3">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 3 из 7</div>
+
+<h2>Форма крыши</h2>
+
+<p>Выберите тип крыши для более точного расчета площади.</p>
+</div>
+<button class="ts-back" data-back="2" type="button">&larr; Назад</button></div>
+
+<div class="ts-shape-grid">
+<div class="ts-shape-card ts-selected" data-shape="2ape">
+<div class="ts-shape-icon"><svg fill="none" viewbox="0 0 160 90"><path d="M15 70L80 20L145 70" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></path><path d="M40 70H120" stroke="currentColor" stroke-linecap="round" stroke-width="8"></path></svg></div>
+<strong>2 ската</strong><span>Расчет для крыши в два ската</span></div>
+
+<div class="ts-shape-card" data-shape="4ape">
+<div class="ts-shape-icon"><svg fill="none" viewbox="0 0 160 90"><path d="M20 62L60 35H100L140 62" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></path><path d="M60 35L80 18L100 35" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="8"></path><path d="M45 62H115" stroke="currentColor" stroke-linecap="round" stroke-width="8"></path></svg></div>
+<strong>4 ската</strong><span>Расчет для крыши в четыре ската</span></div>
+</div>
+<button class="ts-btn ts-btn-main" id="next3" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="4">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 4 из 7</div>
+
+<h2>Размеры дома</h2>
+
+<p>Введите длину и ширину дома, уклон и свес.</p>
+</div>
+<button class="ts-back" data-back="3" type="button">&larr; Назад</button></div>
+
+<div class="ts-grid-2">
+<div class="ts-field"><label for="houseLength">Длина (м)</label><input class="ts-input" id="houseLength" min="1" step="0.1" type="number" value="12" /></div>
+
+<div class="ts-field"><label for="houseWidth">Ширина (м)</label><input class="ts-input" id="houseWidth" min="1" step="0.1" type="number" value="10" /></div>
+
+<div class="ts-field"><label for="houseSlope">Уклон (%)</label><input class="ts-input" id="houseSlope" min="1" step="1" type="number" value="35" /></div>
+
+<div class="ts-field"><label for="houseEave">Свес (см)</label><input class="ts-input" id="houseEave" min="0" step="1" type="number" value="60" /></div>
+</div>
+
+<div class="ts-help-box">Формула уклона сохранена. Для крыши в 4 ската отдельно учитываются трапеции, треугольники и корректировка по ребрам.</div>
+<button class="ts-btn ts-btn-main" id="next4" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="5">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 5 из 7</div>
+
+<h2>Выберите пакет</h2>
+
+<p>Можно рассчитать только металлочерепицу, металлочерепицу с аксессуарами или крышу под ключ.</p>
+</div>
+<button class="ts-back" data-back="4" type="button">&larr; Назад</button></div>
+
+<div class="ts-option-grid">
+<div class="ts-option-card ts-selected" data-package="tile"><strong>Только металлочерепица</strong>
+
+<p>Ориентировочный расчет только металлочерепицы.</p>
+</div>
+
+<div class="ts-option-card" data-package="accessories"><strong>Металлочерепица + аксессуары</strong>
+
+<p>К расчету автоматически добавляются аксессуары.</p>
+</div>
+
+<div class="ts-option-card" data-package="turnkey"><strong>Крыша под ключ</strong>
+
+<p>Применяется специальная цена за м&sup2; для полного пакета.</p>
+</div>
+</div>
+<button class="ts-btn ts-btn-main" id="next5" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="6">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 6 из 7</div>
+
+<h2>Населенный пункт</h2>
+
+<p>Где будет выполняться монтаж крыши?</p>
+</div>
+<button class="ts-back" data-back="5" type="button">&larr; Назад</button></div>
+
+<div class="ts-city-grid" id="cityGrid"><button class="ts-city-btn" data-city="Кишинёв" type="button">Кишинёв</button><button class="ts-city-btn" data-city="Бельцы" type="button">Бельцы</button><button class="ts-city-btn" data-city="Яловены" type="button">Яловены</button><button class="ts-city-btn" data-city="Оргеев" type="button">Оргеев</button><button class="ts-city-btn" data-city="Кагул" type="button">Кагул</button><button class="ts-city-btn" data-city="Унгены" type="button">Унгены</button><button class="ts-city-btn" data-city="Сороки" type="button">Сороки</button><button class="ts-city-btn" data-city="Единцы" type="button">Единцы</button><button class="ts-city-btn" data-city="Комрат" type="button">Комрат</button><button class="ts-city-btn" data-city="Страшены" type="button">Страшены</button><button class="ts-city-btn" data-city="Хынчешты" type="button">Хынчешты</button><button class="ts-city-btn" data-city="Дрокия" type="button">Дрокия</button><button class="ts-city-btn" data-city="Флорешты" type="button">Флорешты</button><button class="ts-city-btn" data-city="Каушаны" type="button">Каушаны</button><button class="ts-city-btn" data-city="Криулены" type="button">Криулены</button><button class="ts-city-btn" data-city="Ниспорены" type="button">Ниспорены</button><button class="ts-city-btn" data-city="Штефан Водэ" type="button">Штефан Водэ</button><button class="ts-city-btn" data-city="Другой населенный пункт" type="button">Другой населенный пункт</button></div>
+
+<div class="ts-city-other" id="cityOtherWrap">
+<div class="ts-field"><label for="cityOther">Укажите населенный пункт</label><input class="ts-input" id="cityOther" placeholder="Например: Чимишлия" type="text" /></div>
+</div>
+<button class="ts-btn ts-btn-main" id="next6" type="button">Далее &rarr;</button>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="7">
+<div class="ts-step-head">
+<div>
+<div class="ts-step-no">Шаг 7 из 7</div>
+
+<h2>Итог и ваши данные</h2>
+
+<p>Проверьте расчет и отправьте заявку.</p>
+</div>
+<button class="ts-back" data-back="6" type="button">&larr; Назад</button></div>
+
+<div class="ts-estimate">
+<div class="ts-estimate-label">Расчет стоимости</div>
+
+<div class="ts-estimate-row">
+<div id="summaryLine1">Металлочерепица &times; 0 м&sup2;</div>
+<strong id="summaryPartial">0 лей</strong></div>
+
+<div class="ts-estimate-row"><strong>Итого ориентировочно</strong>
+
+<div class="ts-estimate-total" id="summaryTotal">0 лей</div>
+</div>
+
+<div class="ts-estimate-note" id="summaryNote">Цена ориентировочная. Точное предложение может включать аксессуары, доставку и технические детали.</div>
+</div>
+
+<div class="ts-thank-summary">
+<div class="ts-thank-row"><span>Модель:</span><strong id="sumModel">-</strong></div>
+
+<div class="ts-thank-row"><span>Цвет:</span><strong id="sumColor">-</strong></div>
+
+<div class="ts-thank-row"><span>Форма:</span><strong id="sumShape">-</strong></div>
+
+<div class="ts-thank-row"><span>Площадь:</span><strong id="sumArea">-</strong></div>
+
+<div class="ts-thank-row"><span>Населенный пункт:</span><strong id="sumCity">-</strong></div>
+
+<div class="ts-thank-row"><span>Пакет:</span><strong id="sumPackage">-</strong></div>
+</div>
+
+<div class="ts-contact-box">
+<div class="ts-field"><label for="clientName">Ваше имя</label><input class="ts-input" id="clientName" placeholder="Ваше имя" type="text" /></div>
+
+<div class="ts-field"><label for="clientPhone">Телефон</label><input class="ts-input" id="clientPhone" placeholder="+373 XX XXX XXX" type="tel" /></div>
+</div>
+
+<div class="ts-submit-row"><button class="ts-btn ts-btn-main ts-strong" id="sendWhatsapp" type="button">Запросить предложение</button></div>
+
+<div class="ts-direct">Или позвоните напрямую: <a href="tel:+37379980247">+373 79 980 247</a></div>
+</section>
+
+<section class="ts-step" data-step="8">
+<div class="ts-thank">
+<div class="ts-thank-icon">✓</div>
+
+<h3 id="thankTitle">Спасибо!</h3>
+
+<p>Заявка отправлена. Мы свяжемся с вами в ближайшее время и подготовим детальное предложение по крыше.</p>
+
+<div class="ts-thank-summary">
+<div class="ts-thank-row"><span>Материал:</span><strong>Металлочерепица</strong></div>
+
+<div class="ts-thank-row"><span>Модель:</span><strong id="thankModel">-</strong></div>
+
+<div class="ts-thank-row"><span>Площадь:</span><strong id="thankArea">-</strong></div>
+
+<div class="ts-thank-row"><span>Ориентировочная сумма:</span><strong id="thankTotal" style="color:var(--accent-strong);">-</strong></div>
+</div>
+
+<div class="ts-submit-row"><button class="ts-btn ts-btn-main ts-strong" id="downloadOfferImage" type="button">Скачать предложение как изображение</button><button class="ts-btn ts-btn-dark" id="restartCalc" type="button">Рассчитать заново</button></div>
+</div>
+</section>
+</div>
+<textarea class="ts-hidden-copy" id="copyBuffer" readonly="readonly"></textarea></div>
+
+<div class="ts-floating-bar">
+<div class="ts-floating-inner"><a class="ts-mini-btn" href="tel:+37379980247" style="background:linear-gradient(135deg,#e30613 0%,#c40010 100%);"><svg fill="none" viewbox="0 0 24 24"><path d="M6.6 10.8c1.8 3.5 3.1 4.8 6.6 6.6l2.2-2.2c.3-.3.8-.4 1.2-.2 1 .4 2 .6 3 .6.6 0 1 .4 1 1V21c0 .6-.4 1-1 1C10.7 22 2 13.3 2 2c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1 .2 2 .6 3 .1.4.1.8-.2 1.2L6.6 10.8Z" fill="none" stroke="currentColor" stroke-width="1.7"></path></svg>Позвонить</a></div>
+</div>
+
+<div id="offerExportWrap" style="position:fixed;left:-99999px;top:0;width:430px;background:#fff;z-index:-1;">
+<div id="offerExportCard" style="width:430px;background:#fff;color:#111;padding:22px;font-family:Arial,Helvetica,sans-serif;box-sizing:border-box;border-radius:28px;">
+<div style="font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#9ca3af;font-weight:800;margin-bottom:8px;">Ориентировочное предложение</div>
+
+<div style="font-size:26px;font-weight:900;line-height:1.05;color:#111;margin-bottom:12px;">Металлическая крыша</div>
+
+<div style="background:#f3f4f6;border-radius:22px;padding:14px;margin-bottom:16px;"><img alt="Выбранная крыша" id="expImage" loading="lazy" src="" style="width:100%;height:190px;object-fit:contain;display:block;" /></div>
+
+<div style="background:#fff5f5;border:1px solid #ffd5d9;border-radius:22px;padding:16px;margin-bottom:16px;">
+<div style="font-size:11px;text-transform:uppercase;color:#b91c1c;font-weight:800;letter-spacing:1px;margin-bottom:8px;">Итого ориентировочно</div>
+
+<div id="expTotal" style="font-size:38px;line-height:1;font-weight:900;color:#c40010;">0 лей</div>
+</div>
+
+<div style="border:1px solid #e5e7eb;border-radius:22px;overflow:hidden;margin-bottom:16px;">
+<table style="width:100%;border-collapse:collapse;font-size:14px;">
+	<tbody>
+		<tr>
+			<td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Модель</td>
+			<td id="expModel" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td>
+		</tr>
+		<tr>
+			<td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Цвет</td>
+			<td id="expColorName" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td>
+		</tr>
+		<tr>
+			<td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Форма</td>
+			<td id="expShape" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td>
+		</tr>
+		<tr>
+			<td style="padding:12px;border-bottom:1px solid #eef2f7;color:#6b7280;">Пакет</td>
+			<td id="expPackage" style="padding:12px;border-bottom:1px solid #eef2f7;font-weight:800;text-align:right;">-</td>
+		</tr>
+		<tr>
+			<td style="padding:12px;color:#6b7280;">Площадь</td>
+			<td id="expArea" style="padding:12px;font-weight:800;text-align:right;">-</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+
+<div style="font-size:12px;color:#9ca3af;">TotulShop.md &bull; +373 79 980 247</div>
+</div>
+</div>
 <script>
 (function(){
 const WEBAPP_URL="https://script.google.com/macros/s/AKfycbzhfc6elXTBVsYZXwytq6rBcIJLpsniEnpjFmczglmrPbno56hcmG-hfLbn-3do0UNySQ/exec";
@@ -80,5 +324,3 @@ function sendLead(){state.name=$("clientName").value.trim();state.phone=$("clien
 document.querySelectorAll(".ts-back").forEach(btn=>btn.addEventListener("click",()=>goToStep(Number(btn.getAttribute("data-back")))));$("next1").addEventListener("click",()=>goToStep(2));$("next2").addEventListener("click",()=>goToStep(3));$("next3").addEventListener("click",()=>goToStep(4));$("next4").addEventListener("click",()=>{state.length=num($("houseLength").value);state.width=num($("houseWidth").value);state.slope=num($("houseSlope").value);state.eave=num($("houseEave").value);if(!validateStep(4))return;goToStep(5)});$("next5").addEventListener("click",()=>goToStep(6));$("next6").addEventListener("click",()=>{$("cityOther").classList.remove("ts-error");state.customCity=$("cityOther").value.trim();if(!validateStep(6)){alert("Выберите населенный пункт.");return}goToStep(7)});document.querySelectorAll("[data-shape]").forEach(el=>el.addEventListener("click",()=>{state.shape=el.getAttribute("data-shape");renderShapes();refreshContinueButtons()}));document.querySelectorAll("[data-package]").forEach(el=>el.addEventListener("click",()=>{state.package=el.getAttribute("data-package");renderPackages();renderSummary();refreshContinueButtons()}));document.querySelectorAll("[data-city]").forEach(el=>el.addEventListener("click",()=>{state.city=el.getAttribute("data-city");if(state.city!=="Другой населенный пункт"){state.customCity="";$("cityOther").value=""}renderCities();renderSummary();refreshContinueButtons()}));["houseLength","houseWidth","houseSlope","houseEave"].forEach(id=>$(id).addEventListener("input",function(){this.classList.remove("ts-error");state.length=num($("houseLength").value);state.width=num($("houseWidth").value);state.slope=num($("houseSlope").value);state.eave=num($("houseEave").value);renderSummary();refreshContinueButtons()}));$("cityOther").addEventListener("input",function(){this.classList.remove("ts-error");state.customCity=this.value.trim();renderSummary();refreshContinueButtons()});$("clientName").addEventListener("input",function(){this.classList.remove("ts-error");state.name=this.value.trim();renderSummary()});$("clientPhone").addEventListener("input",function(){this.classList.remove("ts-error");state.phone=this.value.trim()});$("sendWhatsapp").addEventListener("click",sendLead);$("downloadOfferImage").addEventListener("click",downloadOfferImage);$("restartCalc").addEventListener("click",()=>{state.currentStep=1;state.model="dakia";state.color="7024";state.shape="2ape";state.length=12;state.width=10;state.slope=35;state.eave=60;state.package="tile";state.city="";state.customCity="";state.name="";state.phone="";$("houseLength").value=12;$("houseWidth").value=10;$("houseSlope").value=35;$("houseEave").value=60;$("cityOther").value="";$("clientName").value="";$("clientPhone").value="";document.querySelectorAll(".ts-input").forEach(el=>el.classList.remove("ts-error"));goToStep(1)});renderAll();goToStep(1);refreshContinueButtons();
 })();
 </script>
-</body>
-</html>
